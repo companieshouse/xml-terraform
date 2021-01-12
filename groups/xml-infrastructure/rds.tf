@@ -76,7 +76,7 @@ module "xml_rds" {
     {
       option_name                    = "OEM"
       port                           = "5500"
-      vpc_security_group_memberships = [module.ewf_rds_security_group.this_security_group_id]
+      vpc_security_group_memberships = [module.xml_rds_security_group.this_security_group_id]
     },
     {
       option_name = "JVM"
