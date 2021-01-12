@@ -93,6 +93,12 @@ module "xml_rds" {
     },
   ]
 
+  timeouts = {
+    "create" : "80m",
+    "delete" : "80m",
+    "update" : "80m"
+  }
+
   tags = merge(
     local.default_tags,
     map(
