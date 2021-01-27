@@ -7,7 +7,7 @@ locals {
 
   internal_fqdn = format("%s.%s.aws.internal", split("-", var.aws_account)[1], split("-", var.aws_account)[0])
 
-  rds_ingress_cidrs = concat(local.admin_cidrs, ["192.168.90.0/24"])
+  rds_ingress_cidrs = concat(local.admin_cidrs, var.rds_onpremise_access)
 
   default_tags = {
     Terraform   = "true"
