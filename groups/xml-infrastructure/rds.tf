@@ -58,14 +58,9 @@ module "xml_rds" {
   final_snapshot_identifier = "${var.application}-final-deletion-snapshot"
 
   # Enhanced Monitoring
-  monitoring_interval = "30"
-  monitoring_role_arn = data.aws_iam_role.rds_enhanced_monitoring.arn
-  enabled_cloudwatch_logs_exports = [
-    "alert",
-    "audit",
-    "listener",
-    "trace"
-  ]
+  monitoring_interval             = "30"
+  monitoring_role_arn             = data.aws_iam_role.rds_enhanced_monitoring.arn
+  enabled_cloudwatch_logs_exports = var.rds_log_exports
 
   # RDS Security Group
   vpc_security_group_ids = [
