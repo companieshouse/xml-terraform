@@ -12,11 +12,11 @@ application = "xml"
 environment = "live"
 
 # RDS Instance settings
-instance_class = "db.m5.xlarge"
-allocated_storage = 1500
-maximum_storage   = 1600
+instance_class          = "db.m5.xlarge"
+allocated_storage       = 1500
+maximum_storage         = 1600
 backup_retention_period = 14
-multi_az = true
+multi_az                = true
 
 # RDS Engine settings
 major_engine_version = "12.1"
