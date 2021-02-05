@@ -85,6 +85,12 @@ variable "rds_onpremise_access" {
   default     = []
 }
 
+variable "rds_log_exports" {
+  type        = list(string)
+  description = "A list log types to export from RDS to Cloudwatch"
+  default     = []
+}
+
 # ------------------------------------------------------------------------------
 # RDS Engine Type Variables
 # ------------------------------------------------------------------------------
