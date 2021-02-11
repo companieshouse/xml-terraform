@@ -17,12 +17,14 @@ allocated_storage       = 1500
 maximum_storage         = 1600
 backup_retention_period = 14
 multi_az                = true
+rds_maintenance_window  = "Wed:00:00-Wed:03:00"
+rds_backup_window       = "03:00-06:00"
 
 # RDS Engine settings
-major_engine_version = "12.1"
-engine_version       = "12.1.0.2.v22"
-license_model        = "license-included"
-auto_minor_version_upgrade  = false
+major_engine_version        = "12.1"
+engine_version              = "12.1.0.2.v22"
+license_model               = "license-included"
+auto_minor_version_upgrade  = true
 
 # RDS logging
 rds_log_exports = [
@@ -34,8 +36,14 @@ rds_log_exports = [
 
 # RDS Access
 rds_onpremise_access = [
+  "192.168.70.0/24",
   "192.168.90.0/24",
-  "172.24.4.17/32"
+  "172.24.4.17/32",
+  "192.168.60.130/32", 
+  "192.168.60.131/32", 
+  "192.168.60.132/32", 
+  "192.168.60.133/32", 
+  "192.168.60.134/32"
 ]
 
 # RDS Param and Option settings
