@@ -1,4 +1,17 @@
 # ------------------------------------------------------------------------------
+# Vault Variables
+# ------------------------------------------------------------------------------
+variable "vault_username" {
+  type        = string
+  description = "Username for connecting to Vault - usually supplied through TF_VARS"
+}
+
+variable "vault_password" {
+  type        = string
+  description = "Password for connecting to Vault - usually supplied through TF_VARS"
+}
+
+# ------------------------------------------------------------------------------
 # AWS Variables
 # ------------------------------------------------------------------------------
 variable "aws_region" {
@@ -42,6 +55,27 @@ variable "application" {
 variable "environment" {
   type        = string
   description = "The name of the environment"
+}
+
+# ASG Variables
+variable "instance_size" {
+  type        = string
+  description = "The size of the ec2 instance"
+}
+
+variable "min_size" {
+  type        = number
+  description = "The min size of the ASG"
+}
+
+variable "max_size" {
+  type        = number
+  description = "The max size of the ASG"
+}
+
+variable "desired_capacity" {
+  type        = number
+  description = "The desired capacity of ASG"
 }
 
 # ------------------------------------------------------------------------------
@@ -123,14 +157,46 @@ variable "auto_minor_version_upgrade" {
 }
 
 # ------------------------------------------------------------------------------
-# Vault Variables
+# XML Frontend Variables - ALB 
 # ------------------------------------------------------------------------------
-variable "vault_username" {
-  type        = string
-  description = "Username for connecting to Vault - usually supplied through TF_VARS"
+
+variable "backend_port" {
+  type        = number
+  default     = 80
+  description = "Target group backend port"
 }
 
-variable "vault_password" {
+variable "public_cidr_block" {
   type        = string
-  description = "Password for connecting to Vault - usually supplied through TF_VARS"
+  default     = "0.0.0.0/0"
+  description = "cidr block for allowing inbound users from internet"
+}
+
+variable "domain_name" {
+  type        = string
+  default     = "*.companieshouse.gov.uk"
+  description = "Domain Name for ACM Certificate"
+}
+
+variable "health_check_path" {
+  type        = string
+  default     = "/"
+  description = "Target group health check path"
+}
+
+variable "log_group_retention_in_days" {
+  type        = number
+  default     = 14
+  description = "Total days to retain logs in CloudWatch log group"
+}
+
+variable "app_release_version" {
+  type        = string
+  description = "Version of the application to download for deployment to frontend servers"
+}
+
+variable "frontend_ami_name" {
+  type        = string
+  default     = "xml-frontend-*"
+  description = "Name of the AMI to use in the Auto Scaling configuration for frontend servers"
 }
