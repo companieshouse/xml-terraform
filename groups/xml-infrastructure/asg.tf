@@ -37,7 +37,7 @@ resource "aws_cloudwatch_log_group" "xml_fe" {
 }
 
 # ASG Module
-module "asg" {
+module "frontend_asg" {
   source = "git@github.com:companieshouse/terraform-modules//aws/terraform-aws-autoscaling?ref=tags/1.0.36"
 
   name = "${var.application}-webserver"

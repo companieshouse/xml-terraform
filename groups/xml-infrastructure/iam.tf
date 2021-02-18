@@ -1,19 +1,12 @@
 module "xml_frontend_profile" {
-  source = "git@github.com:companieshouse/terraform-modules//aws/instance_profile?ref=tags/1.0.31"
+  source = "git@github.com:companieshouse/terraform-modules//aws/instance_profile?ref=tags/1.0.40"
 
-  name = "xml_frontend_profile"
-  statement = [
-    {
-      sid    = "xmlloggroupwrite"
-      effect = "Allow"
-      resources = [
-        aws_cloudwatch_log_group.xml_fe.arn
-      ]
-      actions = [
-        "logs:CreateLogStream",
-        "logs:PutLogEvents",
-      ]
-    },
+  name              = "xml_frontend_profile"
+  enable_SSM        = true
+  cw_log_group_arns = [aws_cloudwatch_log_group.xml_fe.arn]
+  instance_asg_arns = [module.frontend_asg.this_autoscaling_group_arn]
+  kms_key_refs      = ["alias/${var.account}/${var.region}/ebs"]
+  custom_statements = [
     {
       sid    = "AllowAccessToReleaseBucket",
       effect = "Allow",
