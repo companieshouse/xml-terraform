@@ -75,7 +75,6 @@ module "frontend_asg" {
   tags_as_map = merge(
     local.default_tags,
     map(
-      "Name", "${var.application}-web-instance",
       "ServiceTeam", "${upper(var.application)}-FE-Support"
     )
   )
