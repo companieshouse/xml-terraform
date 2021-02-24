@@ -31,7 +31,7 @@ resource "aws_cloudwatch_log_group" "xml_fe" {
   tags = merge(
     local.default_tags,
     map(
-      "ServiceTeam", "${upper(var.application)}-DBA-Support"
+      "ServiceTeam", "${upper(var.application)}-FE-Support"
     )
   )
 }
@@ -50,6 +50,7 @@ module "frontend_asg" {
     {
       volume_size = "40"
       volume_type = "gp2"
+      encrypted   = true
     },
   ]
   # Auto scaling group
@@ -69,21 +70,13 @@ module "frontend_asg" {
   termination_policies           = ["OldestLaunchConfiguration"]
   target_group_arns              = concat(module.xml_external_alb.target_group_arns, module.xml_internal_alb.target_group_arns)
   iam_instance_profile           = module.xml_frontend_profile.aws_iam_instance_profile.name
-  user_data = templatefile("${path.module}/templates/user_data.tpl",
-    {
-      REGION              = var.aws_region
-      LOG_GROUP_NAME      = "logs-${var.application}-frontend"
-      XML_FRONTEND_INPUTS = local.xml_frontend_data
-      APP_VERSION         = var.app_release_version
-      S3_RELEASE_BUCKET   = local.s3_releases["release_bucket_name"]
-    }
-  )
+  user_data_base64               = data.template_cloudinit_config.frontend_userdata_config.rendered
 
   tags_as_map = merge(
     local.default_tags,
     map(
       "Name", "${var.application}-web-instance",
-      "ServiceTeam", "${upper(var.application)}-EC2-Support"
+      "ServiceTeam", "${upper(var.application)}-FE-Support"
     )
   )
 

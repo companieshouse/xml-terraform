@@ -80,7 +80,7 @@ module "xml_internal_alb" {
   tags = merge(
     local.default_tags,
     map(
-      "ServiceTeam", "${upper(var.application)}-DBA-Support"
+      "ServiceTeam", "${upper(var.application)}-FE-Support"
     )
   )
 }

@@ -60,7 +60,7 @@ data "vault_generic_secret" "internal_cidrs" {
   path = "aws-accounts/network/internal_cidr_ranges"
 }
 
-data "vault_generic_secret" "xml_rds" {
+data "vault_generic_secret" "xml_rds_data" {
   path = "applications/${var.aws_profile}/${var.application}/rds"
 }
 
@@ -93,4 +93,26 @@ data "aws_ami" "xml" {
       "available",
     ]
   }
+}
+
+data "template_file" "frontend_userdata" {
+  template = file("${path.module}/templates/user_data.tpl")
+
+  vars = {
+    REGION              = var.aws_region
+    LOG_GROUP_NAME      = "logs-${var.application}-frontend"
+    XML_FRONTEND_INPUTS = local.xml_frontend_data
+    ANSIBLE_INPUTS      = jsonencode(local.xml_frontend_ansible_inputs)
+  }
+}
+
+data "template_cloudinit_config" "frontend_userdata_config" {
+  gzip          = true
+  base64_encode = true
+
+  part {
+    content_type = "text/x-shellscript"
+    content      = data.template_file.frontend_userdata.rendered
+  }
+
 }
