@@ -11,6 +11,12 @@ region  = "euw2"
 application = "xml"
 environment = "live"
 
+# Frontend ASG settings
+instance_size = "t2.medium"
+min_size = 1
+max_size = 1
+desired_capacity = 1
+
 # RDS Instance settings
 instance_class          = "db.m5.xlarge"
 allocated_storage       = 1500
