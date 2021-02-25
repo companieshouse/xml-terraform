@@ -37,20 +37,8 @@ data "aws_security_group" "rds_shared" {
 
 data "aws_security_group" "tuxedo" {
   filter {
-    name   = "tag:Service"
-    values = ["tuxedo"]
-  }
-  filter {
-    name   = "tag:ServiceSubType"
-    values = ["frontend"]
-  }
-  filter {
-    name   = "tag:TuxedoServerType"
-    values = ["xml"]
-  }
-  filter {
-    name   = "tag:Environment"
-    values = [var.environment]
+    name   = "tag:Name"
+    values = ["xml-frontend-tuxedo-${var.environment}"]
   }
 }
 
