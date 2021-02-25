@@ -102,7 +102,7 @@ data "template_file" "frontend_userdata" {
     REGION                    = var.aws_region
     LOG_GROUP_NAME            = "logs-${var.application}-frontend"
     XML_FRONTEND_INPUTS       = local.xml_frontend_data
-    ANSIBLE_PLAYBOOK_REPO     = "https://github.com/companieshouse/ewf-ami.git"
+    ANSIBLE_PLAYBOOK_REPO     = "https://github.com/companieshouse/xml-ami.git"
     ANSIBLE_PLAYBOOK_LOCATION = "deployment-scripts/frontend_deployment.yml"
     ANSIBLE_INPUTS            = jsonencode(local.xml_frontend_ansible_inputs)
   }
