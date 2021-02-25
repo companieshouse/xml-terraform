@@ -5,7 +5,7 @@ exec > >(tee /var/log/user-data.log|logger -t user-data -s 2>/dev/console) 2>&1
 python /root/cw_log_conf.py \
  -g ${LOG_GROUP_NAME} \
  -o "amazon-cloudwatch-agent.log" \
- -l "/var/log/httpd/xml_access_log" "/var/log/httpd/xml_error_log"
+ -l "/var/log/httpd/access_log" "/var/log/httpd/error_log"
 . /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -c file:amazon-cloudwatch-agent.log -s
 #Create key:value variable
 cat <<EOF >>inputs.json
