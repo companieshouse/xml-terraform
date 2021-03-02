@@ -8,7 +8,7 @@ resource "aws_route53_record" "xml_rds" {
 
 resource "aws_route53_record" "xml_alb_internal" {
   zone_id = data.aws_route53_zone.private_zone.zone_id
-  name    = var.application
+  name    = "xmlgw"
   type    = "A"
 
   alias {
