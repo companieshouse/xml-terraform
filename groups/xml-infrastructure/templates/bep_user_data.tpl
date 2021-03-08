@@ -22,9 +22,5 @@ crontab -u xml /root/cronfile
 rm /etc/httpd/conf.d/welcome.conf
 rm /etc/httpd/conf.d/ssl.conf
 rm /etc/httpd/conf.d/perl.conf
-#Create and populate httpd config
-/usr/local/bin/j2 -f json /etc/httpd/conf/httpd.conf.j2 inputs.json > /etc/httpd/conf/httpd.conf
-#Create and populate the perl config
-/usr/local/bin/j2 -f json /etc/httpd/conf.d/perl.conf.j2 inputs.json > /etc/httpd/conf.d/perl.conf
 #Run Ansible playbook for Backend deployment using provided inputs
-/usr/local/bin/ansible-playbook /root/frontend_deployment.yml -e '${ANSIBLE_INPUTS}'
+/usr/local/bin/ansible-playbook /root/backend_deployment.yml -e '${ANSIBLE_INPUTS}'
