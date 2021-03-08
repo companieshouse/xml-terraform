@@ -42,7 +42,7 @@ module "bep_asg" {
     },
   ]
   # Auto scaling group
-  asg_name                       = "${var.application}-asg"
+  asg_name                       = "${var.application}-bep-asg"
   vpc_zone_identifier            = data.aws_subnet_ids.application.ids
   health_check_type              = "EC2"
   min_size                       = var.bep_min_size

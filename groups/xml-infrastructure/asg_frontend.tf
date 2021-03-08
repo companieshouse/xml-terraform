@@ -54,7 +54,7 @@ module "fe_asg" {
     },
   ]
   # Auto scaling group
-  asg_name                       = "${var.application}-asg"
+  asg_name                       = "${var.application}-fe-asg"
   vpc_zone_identifier            = data.aws_subnet_ids.web.ids
   health_check_type              = "ELB"
   min_size                       = var.fe_min_size
