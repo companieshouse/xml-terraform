@@ -32,12 +32,16 @@ module "xml_rds_security_group" {
   computed_ingress_with_source_security_group_id = [
     {
       rule                     = "oracle-db-tcp"
-      source_security_group_id = module.xml_asg_security_group.this_security_group_id
+      source_security_group_id = module.xml_fe_asg_security_group.this_security_group_id
       description              = "Allow frontends to connect to RDS"
+    },
+    {
+      rule                     = "oracle-db-tcp"
+      source_security_group_id = module.xml_bep_asg_security_group.this_security_group_id
+      description              = "Allow backend to connect to RDS"
     }
   ]
-  number_of_computed_ingress_with_source_security_group_id = 1
-
+  number_of_computed_ingress_with_source_security_group_id = 2
 
   egress_rules = ["all-all"]
 }
@@ -75,6 +79,7 @@ module "xml_rds" {
   backup_retention_period   = var.backup_retention_period
   skip_final_snapshot       = "false"
   final_snapshot_identifier = "${var.application}-final-deletion-snapshot"
+  publicly_accessible       = false
 
   # Enhanced Monitoring
   monitoring_interval             = "30"
