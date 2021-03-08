@@ -164,10 +164,11 @@ data "template_file" "bep_userdata" {
   template = file("${path.module}/templates/bep_user_data.tpl")
 
   vars = {
-    REGION              = var.aws_region
-    LOG_GROUP_NAME      = aws_cloudwatch_log_group.xml_bep.name
-    XML_FRONTEND_INPUTS = local.xml_bep_data
-    ANSIBLE_INPUTS      = jsonencode(local.xml_bep_ansible_inputs)
+    REGION             = var.aws_region
+    LOG_GROUP_NAME     = aws_cloudwatch_log_group.xml_bep.name
+    XML_BACKEND_INPUTS = local.xml_bep_data
+    ANSIBLE_INPUTS     = jsonencode(local.xml_bep_ansible_inputs)
+    XML_CRON_ENTRIES   = var.account == "hlive" ? "#No Entries" : templatefile("${path.module}/templates/bep_cron.tpl", { "USER" = "", "PASSWORD" = "" })
   }
 }
 
