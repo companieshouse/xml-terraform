@@ -13,7 +13,7 @@ module "xml_bep_asg_security_group" {
 }
 
 resource "aws_cloudwatch_log_group" "xml_bep" {
-  name              = "logs-${var.application}-frontend"
+  name              = "logs-${var.application}-backend"
   retention_in_days = var.bep_log_group_retention_in_days
 
   tags = merge(
