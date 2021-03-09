@@ -19,9 +19,9 @@ fe_desired_capacity = 2
 
 # Backend ASG settings
 bep_instance_size = "t2.medium"
-bep_min_size = 2
-bep_max_size = 2
-bep_desired_capacity = 2
+bep_min_size = 1
+bep_max_size = 1
+bep_desired_capacity = 1
 
 # CVO Mounts
 nfs_server = "10.104.9.145"

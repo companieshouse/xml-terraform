@@ -25,7 +25,7 @@
 #*/1 0-6 * * 6 /home/xml/efbackend/formPartition.sh >/dev/null 2>&1
 
 # Sunday
-/1 0-23 * * 0 /home/xml/efbackend/formPartition.sh >/dev/null 2>&1
+*/1 0-23 * * 0 /home/xml/efbackend/formPartition.sh >/dev/null 2>&1
 #*/1 0-18 * * 0 /home/ewfbeplive/efbackend/formPartition.sh >/dev/null 2>&1
 #*/1 20-23 * * 0 /home/ewfbeplive/efbackend/formPartition.sh >/dev/null 2>&1
 
