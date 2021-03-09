@@ -141,3 +141,71 @@ parameter_group_settings = [
       value = "AUTO"
     },
 ]
+
+
+frontend_logs = {
+  xmllive_access_lb_ip_log = {
+    file_path = "/var/log/"
+    log_group_retention = 7
+  }
+  xmllive_access_log = {
+    file_path = "/var/log/"
+    log_group_retention = 7
+  }
+  xmllive_error_log = {
+    file_path = "/var/log/"
+    log_group_retention = 7
+  }
+}
+
+
+backend_logs = {
+  backend.log = {
+    file_path = "/var/log/"
+    log_group_retention = 7
+  }
+  createCerts.log = {
+    file_path = "/var/log/"
+    log_group_retention = 7
+  }
+  efimport.log = {
+    file_path = "/var/log/"
+    log_group_retention = 7
+  }
+  emailDispatcher.log = {
+    file_path = "/var/log/"
+    log_group_retention = 7
+  }
+  emailPollReminder.log = {
+    file_path = "/var/log/"
+    log_group_retention = 7
+  }
+  eRemindersRedirect.log = {
+    file_path = "/var/log/"
+    log_group_retention = 7
+  }
+  eRemindersBounce.log = {
+    file_path = "/var/log/"
+    log_group_retention = 7
+  }
+  formPartition.log = {
+    file_path = "/var/log/"
+    log_group_retention = 7
+  }
+  formProcess.log = {
+    file_path = "/var/log/"
+    log_group_retention = 7
+  }
+  formResponse.log = {
+    file_path = "/var/log/"
+    log_group_retention = 7
+  }
+  statsReport.log = {
+    file_path = "/var/log/"
+    log_group_retention = 7
+  }
+  xmlDigestCacheDelete.log = {
+    file_path = "/var/log/"
+    log_group_retention = 7
+  }
+}
