@@ -142,70 +142,117 @@ parameter_group_settings = [
     },
 ]
 
-
 frontend_logs = {
-  xmllive_access_lb_ip_log = {
-    file_path = "/var/log/"
+  "messages" = {
+    file_path = "/var/log"
     log_group_retention = 7
   }
-  xmllive_access_log = {
-    file_path = "/var/log/"
+  
+  "secure" = {
+    file_path = "/var/log"
     log_group_retention = 7
   }
-  xmllive_error_log = {
-    file_path = "/var/log/"
+
+  "yum.log" = {
+    file_path = "/var/log"
+    log_group_retention = 7
+  }
+
+  "access_log" = {
+    file_path = "/var/log/httpd"
+    log_group_retention = 7
+  }
+
+  "error_log" = {
+    file_path = "/var/log/httpd"
     log_group_retention = 7
   }
 }
 
 
 backend_logs = {
-  backend.log = {
-    file_path = "/var/log/"
+ "messages" = {
+    file_path = "/var/log"
     log_group_retention = 7
   }
-  createCerts.log = {
-    file_path = "/var/log/"
+  
+  "secure" = {
+    file_path = "/var/log"
     log_group_retention = 7
   }
-  efimport.log = {
-    file_path = "/var/log/"
+
+  "yum.log" = {
+    file_path = "/var/log"
     log_group_retention = 7
   }
-  emailDispatcher.log = {
-    file_path = "/var/log/"
+
+  "cron" = {
+    file_path = "/var/log"
     log_group_retention = 7
   }
-  emailPollReminder.log = {
-    file_path = "/var/log/"
+
+  "backend.log" = {
+    file_path = "/home/xml"
     log_group_retention = 7
   }
-  eRemindersRedirect.log = {
-    file_path = "/var/log/"
+
+  "corporationTax.log" = {
+    file_path = "/home/xml"
     log_group_retention = 7
   }
-  eRemindersBounce.log = {
-    file_path = "/var/log/"
+
+  "createCerts.log" = {
+    file_path = "/home/xml"
     log_group_retention = 7
   }
-  formPartition.log = {
-    file_path = "/var/log/"
+
+  "efimport.log" = {
+    file_path = "/home/xml"
     log_group_retention = 7
   }
-  formProcess.log = {
-    file_path = "/var/log/"
+
+  "emailDispatcher.log" = {
+    file_path = "/home/xml"
     log_group_retention = 7
   }
-  formResponse.log = {
-    file_path = "/var/log/"
+
+  "emailPollReminder.log" = {
+    file_path = "/home/xml"
     log_group_retention = 7
   }
-  statsReport.log = {
-    file_path = "/var/log/"
+
+  "formArchive.log" = {
+    file_path = "/home/xml"
     log_group_retention = 7
   }
-  xmlDigestCacheDelete.log = {
-    file_path = "/var/log/"
+
+  "formPartition.log" = {
+    file_path = "/home/xml"
+    log_group_retention = 7
+  }
+
+  "formProcess.log" = {
+    file_path = "/home/xml"
+    log_group_retention = 7
+  }
+
+  "formResponse.log" = {
+    file_path = "/home/xml"
+    log_group_retention = 7
+  }
+
+  "statsReport.log" = {
+    file_path = "/home/xml"
+    log_group_retention = 7
+  }
+
+  "weeding.log" = {
+    file_path = "/home/xml"
+    log_group_retention = 7
+  }
+
+  "xmlDigestCacheDelete.log" = {
+    file_path = "/home/xml"
     log_group_retention = 7
   }
 }

@@ -3,10 +3,19 @@ module "xml_fe_profile" {
 
   name       = "xml-frontend-profile"
   enable_SSM = true
-  cw_log_group_arns = [
-    format("arn:aws:logs:%s:%s:log-group:logs-%s-fe*:*:*", var.region, data.aws_caller_identity.current.account_id, var.application),
-    format("arn:aws:logs:%s:%s:log-group:logs-%s-fe*:*", var.region, data.aws_caller_identity.current.account_id, var.application),
-  ]
+  cw_log_group_arns = length(local.fe_log_groups) > 0 ? flatten([
+    formatlist(
+      "arn:aws:logs:%s:%s:log-group:%s:*:*",
+      var.aws_region,
+      data.aws_caller_identity.current.account_id,
+      local.fe_log_groups
+      ),
+    formatlist("arn:aws:logs:%s:%s:log-group:%s:*",
+      var.aws_region,
+      data.aws_caller_identity.current.account_id,
+      local.fe_log_groups
+    ),
+  ]) : null
   instance_asg_arns = [module.fe_asg.this_autoscaling_group_arn]
   kms_key_refs      = ["alias/${var.account}/${var.region}/ebs"]
   custom_statements = [
@@ -32,10 +41,19 @@ module "xml_bep_profile" {
 
   name       = "xml-backend-profile"
   enable_SSM = true
-  cw_log_group_arns = [
-    format("arn:aws:logs:%s:%s:log-group:logs-%s-bep*:*:*", var.region, data.aws_caller_identity.current.account_id, var.application),
-    format("arn:aws:logs:%s:%s:log-group:logs-%s-bep*:*", var.region, data.aws_caller_identity.current.account_id, var.application),
-  ]
+  cw_log_group_arns = length(local.bep_log_groups) > 0 ? flatten([
+    formatlist(
+      "arn:aws:logs:%s:%s:log-group:%s:*:*", 
+      var.aws_region, 
+      data.aws_caller_identity.current.account_id, 
+      local.bep_log_groups
+    ),
+    formatlist("arn:aws:logs:%s:%s:log-group:%s:*",
+      var.aws_region, 
+      data.aws_caller_identity.current.account_id, 
+      local.bep_log_groups
+    ),
+  ]) : null
   instance_asg_arns = [module.bep_asg.this_autoscaling_group_arn]
   kms_key_refs      = ["alias/${var.account}/${var.region}/ebs"]
   custom_statements = [
