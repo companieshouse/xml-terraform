@@ -13,8 +13,10 @@ module "xml_bep_asg_security_group" {
 }
 
 resource "aws_cloudwatch_log_group" "xml_bep" {
-  name              = "logs-${var.application}-backend"
-  retention_in_days = var.bep_log_group_retention_in_days
+  for_each = local.bep_cw_logs
+
+  name              = each.value["log_group_name"]
+  retention_in_days = lookup(each.value, "log_group_retention", var.bep_default_log_group_retention_in_days)
 
   tags = merge(
     local.default_tags,
