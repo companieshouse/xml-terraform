@@ -142,7 +142,7 @@ parameter_group_settings = [
     },
 ]
 
-frontend_logs = {
+fe_cw_logs = {
   "messages" = {
     file_path = "/var/log"
     log_group_retention = 7
@@ -169,8 +169,7 @@ frontend_logs = {
   }
 }
 
-
-backend_logs = {
+bep_cw_logs = {
  "messages" = {
     file_path = "/var/log"
     log_group_retention = 7
