@@ -17,6 +17,7 @@ resource "aws_cloudwatch_log_group" "xml_bep" {
 
   name              = each.value["log_group_name"]
   retention_in_days = lookup(each.value, "log_group_retention", var.bep_default_log_group_retention_in_days)
+  kms_key_id        = lookup(each.value, "kms_key_id", local.logs_kms_key_id)
 
   tags = merge(
     local.default_tags,
