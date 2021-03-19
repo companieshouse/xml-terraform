@@ -35,7 +35,7 @@ resource "aws_autoscaling_schedule" "bep-schedule-stop" {
   min_size               = 0
   max_size               = 0
   desired_capacity       = 0
-  recurrence             = "00 20 * * 1-5" #Mon-Fri at 8pmT
+  recurrence             = "00 20 * * 1-5" #Mon-Fri at 8pm
   autoscaling_group_name = module.bep_asg.this_autoscaling_group_name
 }
 
