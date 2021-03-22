@@ -51,6 +51,8 @@ locals {
     cw_agent_user              = "root"
   }
 
+  websubnet_cidrs = [for subnet in data.aws_subnet.web_details : subnet.cidr_block]
+
   default_tags = {
     Terraform   = "true"
     Application = upper(var.application)
