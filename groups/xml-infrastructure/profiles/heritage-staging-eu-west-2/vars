@@ -12,10 +12,10 @@ application = "xml"
 environment = "staging"
 
 # Frontend ASG settings
-fe_instance_size = "t2.medium"
-fe_min_size = 2
-fe_max_size = 2
-fe_desired_capacity = 2
+fe_instance_size = "t2.large"
+fe_min_size = 1
+fe_max_size = 1
+fe_desired_capacity = 1
 
 # Backend ASG settings
 bep_instance_size = "t2.medium"

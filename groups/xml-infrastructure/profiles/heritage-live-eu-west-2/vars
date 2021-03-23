@@ -12,7 +12,7 @@ application = "xml"
 environment = "live"
 
 # Frontend ASG settings
-fe_instance_size = "t2.medium"
+fe_instance_size = "t2.large"
 fe_min_size = 2
 fe_max_size = 2
 fe_desired_capacity = 2
