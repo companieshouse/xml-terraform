@@ -5,7 +5,7 @@ module "xml_fe_asg_security_group" {
   source  = "terraform-aws-modules/security-group/aws"
   version = "~> 3.0"
 
-  name        = "sgr-${var.application}-asg-001"
+  name        = "sgr-${var.application}-fe-asg-001"
   description = "Security group for the ${var.application} asg"
   vpc_id      = data.aws_vpc.vpc.id
 
