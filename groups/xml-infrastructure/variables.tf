@@ -236,6 +236,12 @@ variable "fe_cw_logs" {
   default     = {}
 }
 
+variable "public_allow_cidr_blocks" {
+  type        = list(any)
+  default     = ["0.0.0.0/0"]
+  description = "cidr block list for allowing inbound users from internet"
+}
+
 # ------------------------------------------------------------------------------
 # XML Backend Variables
 # ------------------------------------------------------------------------------
