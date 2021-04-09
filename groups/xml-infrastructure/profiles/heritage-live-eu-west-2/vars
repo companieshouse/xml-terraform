@@ -155,3 +155,147 @@ parameter_group_settings = [
       value = "AUTO"
     },
 ]
+
+fe_cw_logs = {
+  "messages" = {
+    file_path = "/var/log"
+    log_group_retention = 30
+  }
+  
+  "secure" = {
+    file_path = "/var/log"
+    log_group_retention = 30
+  }
+
+  "yum.log" = {
+    file_path = "/var/log"
+    log_group_retention = 30
+  }
+
+  "errors.log" = {
+    file_path = "/var/log/amazon/ssm"
+    log_group_retention = 30
+  }
+
+  "amazon-ssm-agent.log" = {
+    file_path = "/var/log/amazon/ssm"
+    log_group_retention = 30
+  }
+
+  "access_log" = {
+    file_path = "/var/log/httpd"
+    log_group_retention = 30
+  }
+
+  "error_log" = {
+    file_path = "/var/log/httpd"
+    log_group_retention = 30
+  }
+
+  "access_lb_ip_log" = {
+    file_path = "/var/log/httpd"
+    log_group_retention = 30
+  }
+}
+
+bep_cw_logs = {
+ "messages" = {
+    file_path = "/var/log"
+    log_group_retention = 180
+  }
+  
+  "secure" = {
+    file_path = "/var/log"
+    log_group_retention = 180
+  }
+
+  "yum.log" = {
+    file_path = "/var/log"
+    log_group_retention = 180
+  }
+
+  "cron" = {
+    file_path = "/var/log"
+    log_group_retention = 180
+  }
+
+  "errors.log" = {
+    file_path = "/var/log/amazon/ssm"
+    log_group_retention = 30
+  }
+
+  "amazon-ssm-agent.log" = {
+    file_path = "/var/log/amazon/ssm"
+    log_group_retention = 30
+  }
+
+  "backend.log" = {
+    file_path = "/home/xml"
+    log_group_retention = 180
+  }
+
+  "createCerts.log" = {
+    file_path = "/home/xml"
+    log_group_retention = 180
+  }
+
+  "efimport.log" = {
+    file_path = "/home/xml"
+    log_group_retention = 180
+  }
+
+  "emailDispatcher.log" = {
+    file_path = "/home/xml"
+    log_group_retention = 180
+  }
+
+  "emailPollReminder.log" = {
+    file_path = "/home/xml"
+    log_group_retention = 180
+  }
+
+  "eRemindersBounce.log" = {
+    file_path = "/home/xml"
+    log_group_retention = 180
+  }  
+
+  "eRemindersRedirect.log" = {
+    file_path = "/home/xml"
+    log_group_retention = 180
+  }  
+
+  "formArchive.log" = {
+    file_path = "/home/xml"
+    log_group_retention = 180
+  }
+
+  "formPartition.log" = {
+    file_path = "/home/xml"
+    log_group_retention = 180
+  }
+
+  "formProcess.log" = {
+    file_path = "/home/xml"
+    log_group_retention = 180
+  }
+
+  "formResponse.log" = {
+    file_path = "/home/xml"
+    log_group_retention = 180
+  }
+
+  "statsReport.log" = {
+    file_path = "/home/xml"
+    log_group_retention = 180
+  }
+
+  "weeding.log" = {
+    file_path = "/home/xml"
+    log_group_retention = 180
+  }
+
+  "xmlDigestCacheDelete.log" = {
+    file_path = "/home/xml"
+    log_group_retention = 180
+  }
+}
