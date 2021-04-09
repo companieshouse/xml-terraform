@@ -69,10 +69,13 @@ module "fe_asg" {
 
   name = "${var.application}-webserver"
   # Launch configuration
-  lc_name         = "${var.application}-fe-launchconfig"
-  image_id        = data.aws_ami.fe_xml.id
-  instance_type   = var.fe_instance_size
-  security_groups = [module.xml_fe_asg_security_group.this_security_group_id]
+  lc_name       = "${var.application}-fe-launchconfig"
+  image_id      = data.aws_ami.fe_xml.id
+  instance_type = var.fe_instance_size
+  security_groups = [
+    module.xml_fe_asg_security_group.this_security_group_id,
+    data.aws_security_group.nagios_shared.id
+  ]
   root_block_device = [
     {
       volume_size = "40"
