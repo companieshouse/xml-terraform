@@ -57,10 +57,14 @@ module "bep_asg" {
 
   name = "${var.application}-bep"
   # Launch configuration
-  lc_name         = "${var.application}-bep-launchconfig"
-  image_id        = data.aws_ami.bep_xml.id
-  instance_type   = var.bep_instance_size
-  security_groups = [module.xml_bep_asg_security_group.this_security_group_id]
+  lc_name       = "${var.application}-bep-launchconfig"
+  image_id      = data.aws_ami.bep_xml.id
+  instance_type = var.bep_instance_size
+  security_groups = [
+    module.xml_bep_asg_security_group.this_security_group_id,
+    data.aws_security_group.nagios_shared.id
+  ]
+
   root_block_device = [
     {
       volume_size = "40"
