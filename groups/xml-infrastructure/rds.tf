@@ -27,6 +27,13 @@ module "xml_rds_security_group" {
       protocol                 = "tcp"
       description              = "Frontend Tuxedo"
       source_security_group_id = data.aws_security_group.tuxedo.id
+    },
+    {
+      from_port                = 1521
+      to_port                  = 1521
+      protocol                 = "tcp"
+      description              = "EWF Backend"
+      source_security_group_id = data.aws_security_group.ewf_bep.id
     }
   ]
   computed_ingress_with_source_security_group_id = [

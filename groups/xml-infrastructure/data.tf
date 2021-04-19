@@ -57,6 +57,13 @@ data "aws_security_group" "nagios_shared" {
   }
 }
 
+data "aws_security_group" "ewf_bep" {
+  filter {
+    name   = "tag:Name"
+    values = ["sgr-ewf-bep-asg-*"]
+  }
+}
+
 data "aws_security_group" "tuxedo" {
   filter {
     name   = "tag:Name"
