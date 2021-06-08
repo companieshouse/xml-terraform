@@ -112,6 +112,10 @@ data "vault_generic_secret" "xml_bep_data" {
   path = "applications/${var.aws_account}-${var.aws_region}/${var.application}/backend"
 }
 
+data "vault_generic_secret" "xml_bep_cron_data" {
+  path = "applications/${var.aws_account}-${var.aws_region}/${var.application}/cron"
+}
+
 data "aws_acm_certificate" "acm_cert" {
   domain = var.domain_name
 }
@@ -199,7 +203,11 @@ data "template_file" "bep_userdata" {
     REGION             = var.aws_region
     XML_BACKEND_INPUTS = local.xml_bep_data
     ANSIBLE_INPUTS     = jsonencode(local.xml_bep_ansible_inputs)
-    XML_CRON_ENTRIES   = var.account == "hlive" ? "#No Entries" : templatefile("${path.module}/templates/bep_cron.tpl", { "USER" = "", "PASSWORD" = "" })
+    XML_CRON_ENTRIES = var.account == "hlive" ? "#No Entries" : templatefile("${path.module}/templates/bep_cron.tpl", {
+      "USER"     = data.vault_generic_secret.xml_bep_cron_data.data["username"],
+      "PASSWORD" = data.vault_generic_secret.xml_bep_cron_data.data["password"]
+      }
+    )
   }
 }
 

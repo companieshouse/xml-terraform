@@ -4,10 +4,10 @@
 locals {
   admin_cidrs  = values(data.vault_generic_secret.internal_cidrs.data)
   s3_releases  = data.vault_generic_secret.s3_releases.data
+  xml_ec2_data = data.vault_generic_secret.xml_ec2_data.data
   xml_rds_data = data.vault_generic_secret.xml_rds_data.data
   xml_fe_data  = data.vault_generic_secret.xml_fe_data.data_json
   xml_bep_data = data.vault_generic_secret.xml_bep_data.data_json
-  xml_ec2_data = data.vault_generic_secret.xml_ec2_data.data
 
   kms_keys_data          = data.vault_generic_secret.kms_keys.data
   security_kms_keys_data = data.vault_generic_secret.security_kms_keys.data

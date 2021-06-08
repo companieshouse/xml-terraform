@@ -13,8 +13,8 @@ environment = "live"
 
 # Frontend ASG settings
 fe_instance_size = "t2.large"
-fe_min_size = 1
-fe_max_size = 1
+fe_min_size = 6
+fe_max_size = 6
 fe_desired_capacity = 1
 
 # FE Load Balancer
