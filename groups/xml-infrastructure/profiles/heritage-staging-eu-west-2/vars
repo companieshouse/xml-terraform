@@ -15,7 +15,7 @@ environment = "staging"
 fe_instance_size = "t2.large"
 fe_min_size = 6
 fe_max_size = 6
-fe_desired_capacity = 1
+fe_desired_capacity = 6
 
 # FE Load Balancer
 public_allow_cidr_blocks = []
