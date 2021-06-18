@@ -12,7 +12,7 @@ application = "xml"
 environment = "live"
 
 # Frontend ASG settings
-fe_instance_size = "t2.large"
+fe_instance_size = "m4.xlarge"
 fe_min_size = 6
 fe_max_size = 6
 fe_desired_capacity = 6
@@ -21,7 +21,7 @@ fe_desired_capacity = 6
 public_allow_cidr_blocks = []
 
 # Backend ASG settings
-bep_instance_size = "t2.medium"
+bep_instance_size = "m4.2xlarge"
 bep_min_size = 1
 bep_max_size = 1
 bep_desired_capacity = 1
