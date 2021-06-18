@@ -26,8 +26,8 @@
 #LIVE
 #LIVE# Sunday
 #LIVE*/1 0-23 * * 0 /home/xml/efbackend/formPartition.sh >/dev/null 2>&1
-#LIVE#*/1 0-18 * * 0 /home/ewfbeplive/efbackend/formPartition.sh >/dev/null 2>&1
-#LIVE#*/1 20-23 * * 0 /home/ewfbeplive/efbackend/formPartition.sh >/dev/null 2>&1
+#LIVE#*/1 0-18 * * 0 /home/xml/efbackend/formPartition.sh >/dev/null 2>&1
+#LIVE#*/1 20-23 * * 0 /home/xml/efbackend/formPartition.sh >/dev/null 2>&1
 #LIVE
 #LIVE#########################LIVE SERVICE PROCESSING END#########################
 #LIVE
@@ -55,24 +55,24 @@
 #LIVE#delete the xml tif and txt files
 #LIVE02 02 * * * find /mnt/filling/image/xmlgw -type f -mtime +10  -exec rm -f {} ; >/dev/null 2>&1
 #LIVE######################################SUPPORT SECTION START##############################
-#LIVE*/1 * * * * /home/xmlbeplive/checkapache.sh >/dev/null 2>&1
+#LIVE*/1 * * * * /home/xml/checkapache.sh >/dev/null 2>&1
 #LIVE0 11,16 * * * /home/xml/efbackend/produceStats.sh SupportHourlyStatsReport "sbasile@companieshouse.gov.uk,tjohn@companieshouse.gov.uk,mwilliams5@companieshouse.gov.uk,dcornelius@companieshouse.gov.uk,678104@gmail.com" >/dev/null 2>&1
 #LIVE*/1 * * * * /home/xml/errorlogcheck.sh -700 >/dev/null 2>&1
 #LIVE*/10 0-23 * * * /home/xml/efbackend/monitorLCKfilesWarn.sh >/dev/null 2>&1
 #LIVE*/1 * * * * /home/xml/checkformprocess.sh >/dev/null 2>&1
 #LIVE4,34 * * * * /home/xml/efbackend/filinqueuecheck.sh email 100 >/dev/null 2>&1
-#LIVE0 8-17 * * * /home/xmlbeplive/updateXMLFormDetail.sh >/dev/null 2>&1
-#LIVE0 10 * * * /home/xmlbeplive/failedCerts.sh >/dev/null 2>&1
-#LIVE05 10 * * * /home/xmlbeplive/failedMortCerts.sh >/dev/null 2>&1
-#LIVE*/15 7-18 * * * /home/xmlbeplive/efbackend/status7TNEP.sh >/dev/null 2>&1
-#LIVE*/15 7-18 * * * /home/xmlbeplive/efbackend/updateGenBarcodeSub.sh >/dev/null 2>&1
+#LIVE0 8-17 * * * /home/xml/updateXMLFormDetail.sh >/dev/null 2>&1
+#LIVE0 10 * * * /home/xml/failedCerts.sh >/dev/null 2>&1
+#LIVE05 10 * * * /home/xml/failedMortCerts.sh >/dev/null 2>&1
+#LIVE*/15 7-18 * * * /home/xml/efbackend/status7TNEP.sh >/dev/null 2>&1
+#LIVE*/15 7-18 * * * /home/xml/efbackend/updateGenBarcodeSub.sh >/dev/null 2>&1
 #LIVE#cron back up script 1st of the month
 #LIVE0 6 1 * * /home/xml/crontabBakUp.sh >/dev/null 2>&1
 #LIVE#########################################################################################
 #LIVE#####################################STATS GENERATION START##############################
-#LIVE55 6 * * * /home/xmlbeplive/efbackend/produceStats.sh FiveDayProcessingReportEW "internalstats@companieshouse.gov.uk" 2wkago_5to5_working_days_ew >/dev/null 2>&1
-#LIVE30 2 1 * * /home/xmlbeplive/efbackend/produceStats.sh XMLPresenterTotalReport "sreadman@companieshouse.gov.uk, internalstats@companieshouse.gov.uk" month >/dev/null 2>&1
-#LIVE20 20 * * * /home/xmlbeplive/efbackend/produceFTPStats.sh XMLAccountPaymentsReport 172.16.200.33 ${ USER } ${ PASSWORD } 8to8 >/dev/null 2>&1
+#LIVE55 6 * * * /home/xml/efbackend/produceStats.sh FiveDayProcessingReportEW "internalstats@companieshouse.gov.uk" 2wkago_5to5_working_days_ew >/dev/null 2>&1
+#LIVE30 2 1 * * /home/xml/efbackend/produceStats.sh XMLPresenterTotalReport "sreadman@companieshouse.gov.uk, internalstats@companieshouse.gov.uk" month >/dev/null 2>&1
+#LIVE20 20 * * * /home/xml/efbackend/produceFTPStats.sh XMLAccountPaymentsReport 172.16.200.33 ${ USER } ${ PASSWORD } 8to8 >/dev/null 2>&1
 #LIVE45 23 * * * /home/xml/efbackend/authLastFiled.sh > /tmp/sb.txt 2>&1
 #LIVE30 1 1 * * /home/xml/efbackend/produceStats.sh XMLPresenterAcceptReport "sreadman@companieshouse.gov.uk,cyoude@companieshouse.gov.uk" month >/dev/null 2>&1
 #LIVE55 6 1 * * /home/xml/efbackend/produceStats.sh XMLPresenterRejectReport "sreadman@companieshouse.gov.uk,cyoude@companieshouse.gov.uk" month >/dev/null 2>&1
