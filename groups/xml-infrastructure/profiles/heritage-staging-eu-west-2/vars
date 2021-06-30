@@ -28,7 +28,7 @@ bep_desired_capacity = 1
 
 # CVO Mounts
 nfs_server = "192.168.255.19"
-nfs_mount_destination_parent_dir = "/mnt/nfs/filings"
+nfs_mount_destination_parent_dir = "/mnt/nfs/"
 nfs_mounts = {
       # AWS NFS
       ewf_image = {
