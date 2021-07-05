@@ -42,7 +42,7 @@
 #LIVE*/1 0-23 * * * /home/xml/efbackend/CreateCerts.sh >/dev/null 2>&1
 #LIVE*/1 0-23 * * * /home/xml/efbackend/formResponse.sh >/dev/null 2>&1
 #LIVE*/1 0-23 * * * /home/xml/efbackend/emailDispatcher.sh >/dev/null 2>&1
-#LIVE00 4 * * * /home/xml/efbackend/corporationTax.sh >/dev/null 2>&1
+#LIVE00 4 * * * /home/xml/supportscripts/corporationTax.sh >/dev/null 2>&1
 #LIVE###email poll reminders every morning at 4-30am
 #LIVE30 4 * * * /home/xml/efbackend/emailPollReminder.sh >/dev/null 2>&1
 #LIVE###email unpolled submission report every Monday Morning at 5-30am
@@ -55,16 +55,16 @@
 #LIVE#delete the xml tif and txt files
 #LIVE02 02 * * * find /mnt/filling/image/xmlgw -type f -mtime +10  -exec rm -f {} ; >/dev/null 2>&1
 #LIVE######################################SUPPORT SECTION START##############################
-#LIVE*/1 * * * * /home/xml/checkapache.sh >/dev/null 2>&1
+#LIVE*/1 * * * * /home/xml/supportscripts/checkapache.sh >/dev/null 2>&1
 #LIVE0 11,16 * * * /home/xml/efbackend/produceStats.sh SupportHourlyStatsReport "sbasile@companieshouse.gov.uk,tjohn@companieshouse.gov.uk,mwilliams5@companieshouse.gov.uk,dcornelius@companieshouse.gov.uk,678104@gmail.com" >/dev/null 2>&1
-#LIVE*/1 * * * * /home/xml/errorlogcheck.sh -700 >/dev/null 2>&1
+#LIVE*/1 * * * * /home/xml/supportscripts/errorlogcheck.sh -700 >/dev/null 2>&1
 #LIVE*/10 0-23 * * * /home/xml/efbackend/monitorLCKfilesWarn.sh >/dev/null 2>&1
-#LIVE*/1 * * * * /home/xml/checkformprocess.sh >/dev/null 2>&1
-#LIVE4,34 * * * * /home/xml/efbackend/filinqueuecheck.sh email 100 >/dev/null 2>&1
-#LIVE0 8-17 * * * /home/xml/updateXMLFormDetail.sh >/dev/null 2>&1
-#LIVE0 10 * * * /home/xml/failedCerts.sh >/dev/null 2>&1
-#LIVE05 10 * * * /home/xml/failedMortCerts.sh >/dev/null 2>&1
-#LIVE*/15 7-18 * * * /home/xml/efbackend/status7TNEP.sh >/dev/null 2>&1
+#LIVE*/1 * * * * /home/xml/supportscripts/checkformprocess.sh >/dev/null 2>&1
+#LIVE4,34 * * * * /home/xml/supportscripts/filinqueuecheck.sh email 100 >/dev/null 2>&1
+#LIVE0 8-17 * * * /home/xml/supportscripts/updateXMLFormDetail.sh >/dev/null 2>&1
+#LIVE0 10 * * * /home/xml/supportscripts/failedCerts.sh >/dev/null 2>&1
+#LIVE05 10 * * * /home/xml/supportscripts/failedMortCerts.sh >/dev/null 2>&1
+#LIVE*/15 7-18 * * * /home/xml/supportscripts/status7TNEP.sh >/dev/null 2>&1
 #LIVE*/15 7-18 * * * /home/xml/efbackend/updateGenBarcodeSub.sh >/dev/null 2>&1
 #LIVE#cron back up script 1st of the month
 #LIVE0 6 1 * * /home/xml/crontabBakUp.sh >/dev/null 2>&1
