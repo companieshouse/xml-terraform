@@ -86,7 +86,7 @@
 #LIVE# MAW. 08/09/2015: Now this next line is just to produce a copy of the one above, so that is can be processed for Catherine Youde
 #LIVE# the ftp details are obviously rubbish as it does not get copied anywhere just gets left in /mnt/nfs/ewf/archive/ewf/data/archive/statsReport/
 #LIVE# this is the file that then gets processed by a script (ppXMLPresenterRejectReport.pl) to de-duplicate the reject reasons for Catherine.
-#LIVE56 6 1 * * /home/xml/efbackend/produceFTPStats.sh XMLPresenterRejectReport aaa aaa aaa month >/dev/null 2>&1
+#LIVE56 6 1 * * /home/xml/efbackend/produceFTPStats.sh XMLPresenterRejectReport 172.16.200.33 ${ USER } ${ PASSWORD } month >/dev/null 2>&1
 #LIVE50 6-18 * * * /home/xml/efbackend/produceStats.sh HourlyGeneralDocStatsReport "dcornelius@companieshouse.gov.uk,internalstats@companieshouse.gov.uk" now  >/dev/null 2>&1
 #LIVE5 5 1 * * /home/xml/efbackend/produceStats.sh HMRCDownloadReport "ACINotify@companieshouse.gov.uk" month  >/dev/null 2>&1
 #LIVE#########################################################################################
