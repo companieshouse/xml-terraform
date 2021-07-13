@@ -165,9 +165,10 @@ data "template_file" "fe_userdata" {
   template = file("${path.module}/templates/fe_user_data.tpl")
 
   vars = {
-    REGION              = var.aws_region
-    XML_FRONTEND_INPUTS = local.xml_fe_data
-    ANSIBLE_INPUTS      = jsonencode(local.xml_fe_ansible_inputs)
+    REGION               = var.aws_region
+    HERITAGE_ENVIRONMENT = title(var.environment)
+    XML_FRONTEND_INPUTS  = local.xml_fe_data
+    ANSIBLE_INPUTS       = jsonencode(local.xml_fe_ansible_inputs)
   }
 }
 
@@ -207,9 +208,10 @@ data "template_file" "bep_userdata" {
   template = file("${path.module}/templates/bep_user_data.tpl")
 
   vars = {
-    REGION             = var.aws_region
-    XML_BACKEND_INPUTS = local.xml_bep_data
-    ANSIBLE_INPUTS     = jsonencode(local.xml_bep_ansible_inputs)
+    REGION               = var.aws_region
+    HERITAGE_ENVIRONMENT = title(var.environment)
+    XML_BACKEND_INPUTS   = local.xml_bep_data
+    ANSIBLE_INPUTS       = jsonencode(local.xml_bep_ansible_inputs)
     XML_CRON_ENTRIES = templatefile("${path.module}/templates/bep_cron.tpl", {
       "USER"     = data.vault_generic_secret.xml_bep_cron_data.data["username"],
       "PASSWORD" = data.vault_generic_secret.xml_bep_cron_data.data["password"]
