@@ -1,3 +1,6 @@
+############ 1 ############ LOAD CRON FROM TEMPLATE
+#*/1 * * * * ${HOME}/supportscripts/load_cron.sh >> ${HOME}/load_cron.log
+
 #LIVE#########################LIVE SERVICE PROCESSING START########################
 #LIVE#########################Form Partition#######################################
 #LIVE# Monday to Tuesday

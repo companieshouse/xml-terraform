@@ -123,6 +123,10 @@ data "vault_generic_secret" "xml_bep_cron_data" {
   path = "applications/${var.aws_account}-${var.aws_region}/${var.application}/cron"
 }
 
+data "vault_generic_secret" "xml_fess_data" {
+  path = "applications/${var.aws_account}-${var.aws_region}/${var.application}/fess"
+}
+
 data "aws_acm_certificate" "acm_cert" {
   domain = var.domain_name
 }
@@ -217,6 +221,7 @@ data "template_file" "bep_userdata" {
       "PASSWORD" = data.vault_generic_secret.xml_bep_cron_data.data["password"]
       }
     )
+    XML_FESS_TOKEN = data.vault_generic_secret.xml_fess_data.data["fess_token"]
   }
 }
 
