@@ -216,7 +216,7 @@ data "template_file" "bep_userdata" {
     HERITAGE_ENVIRONMENT = title(var.environment)
     XML_BACKEND_INPUTS   = local.xml_bep_data
     ANSIBLE_INPUTS       = jsonencode(local.xml_bep_ansible_inputs)
-    XML_CRON_ENTRIES = templatefile("${path.module}/profiles/${var.aws_account}-${var.aws_region}/templates/bep_cron.tpl", {
+    XML_CRON_ENTRIES = templatefile("${path.module}/templates/${var.aws_account}-${var.aws_region}/bep_cron.tpl", {
       "USER"     = data.vault_generic_secret.xml_bep_cron_data.data["username"],
       "PASSWORD" = data.vault_generic_secret.xml_bep_cron_data.data["password"]
       }
