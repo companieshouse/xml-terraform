@@ -4,31 +4,31 @@
 ##########################LIVE SERVICE PROCESSING START########################
 ##########################Form Partition#######################################
 # Monday to Tuesday
-*/1 * * * 1-2 /home/xml/efbackend/formPartition.sh >/dev/null 2>&1
-#*/1 0-18 * * 1-2 /home/xml/efbackend/formPartition.sh >/dev/null 2>&1
+#*/1 * * * 1-2 /home/xml/efbackend/formPartition.sh >/dev/null 2>&1
+#*/1 0-19 * * 1-2 /home/xml/efbackend/formPartition.sh >/dev/null 2>&1
 #*/1 22-23 * * 1-2 /home/xml/efbackend/formPartition.sh >/dev/null 2>&1
 
 # Wednesday
-*/1 * * * 3 /home/xml/efbackend/formPartition.sh >/dev/null 2>&1
+#*/1 * * * 3 /home/xml/efbackend/formPartition.sh >/dev/null 2>&1
 #*/1 0-18 * * 3 /home/xml/efbackend/formPartition.sh >/dev/null 2>&1
 #*/1 22-23 * * 3 /home/xml/efbackend/formPartition.sh >/dev/null 2>&1
 
 # Thursday
-*/1 * * * 4 /home/xml/efbackend/formPartition.sh >/dev/null 2>&1
+#*/1 * * * 4 /home/xml/efbackend/formPartition.sh >/dev/null 2>&1
 #*/1 0-18 * * 4 /home/xml/efbackend/formPartition.sh >/dev/null 2>&1
 #*/1 22-23 * * 4 /home/xml/efbackend/formPartition.sh >/dev/null 2>&1
 
 # Friday
-*/1 * * * 5 /home/xml/efbackend/formPartition.sh >/dev/null 2>&1
+#*/1 * * * 5 /home/xml/efbackend/formPartition.sh >/dev/null 2>&1
 #*/1 0-18 * * 5 /home/xml/efbackend/formPartition.sh >/dev/null 2>&1
 #*/1 22-23 * * 5 /home/xml/efbackend/formPartition.sh >/dev/null 2>&1
 
 # Saturday
-*/1 0-23 * * 6 /home/xml/efbackend/formPartition.sh >/dev/null 2>&1
+#*/1 0-23 * * 6 /home/xml/efbackend/formPartition.sh >/dev/null 2>&1
 #*/1 0-6 * * 6 /home/xml/efbackend/formPartition.sh >/dev/null 2>&1
 
 # Sunday
-*/1 0-23 * * 0 /home/xml/efbackend/formPartition.sh >/dev/null 2>&1
+#*/1 0-23 * * 0 /home/xml/efbackend/formPartition.sh >/dev/null 2>&1
 #*/1 0-18 * * 0 /home/xml/efbackend/formPartition.sh >/dev/null 2>&1
 #*/1 20-23 * * 0 /home/xml/efbackend/formPartition.sh >/dev/null 2>&1
 
