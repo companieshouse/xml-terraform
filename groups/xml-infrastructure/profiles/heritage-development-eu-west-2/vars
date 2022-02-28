@@ -11,6 +11,8 @@ region  = "euw2"
 application = "xml"
 environment = "development"
 
+enable_sns_topic = "false"
+
 # Frontend ASG settings
 fe_instance_size = "t2.large"
 fe_min_size = 1
@@ -27,6 +29,7 @@ bep_instance_size = "t2.medium"
 bep_min_size = 1
 bep_max_size = 1
 bep_desired_capacity = 1
+
 
 # CVO Mounts
 nfs_server = "10.104.9.145"

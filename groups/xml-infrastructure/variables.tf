@@ -69,6 +69,12 @@ variable "public_cidr_block" {
   description = "cidr block for allowing inbound users from internet"
 }
 
+variable "enable_sns_topic" {
+  type        = bool
+  description = "A boolean value to alter deployment of an SNS topic for CloudWatch actions"
+  default     = false
+}
+
 # ------------------------------------------------------------------------------
 # NFS Variables
 # ------------------------------------------------------------------------------
