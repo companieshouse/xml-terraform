@@ -105,6 +105,13 @@ rds_onpremise_access = [
   "192.168.60.134/32"
 ]
 
+rds_ingress_groups = [
+  "xml-frontend-tuxedo-live*",
+  "sgr-ewf-bep-*",
+  "sgr-admin-sites-asg-*",
+  "sgr-gfn-app-001-*"
+]
+
 # RDS logging
 rds_log_exports = [
     "alert",
