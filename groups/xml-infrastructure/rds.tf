@@ -20,29 +20,9 @@ module "xml_rds_security_group" {
       cidr_blocks = join(",", local.rds_ingress_cidrs)
     }
   ]
-  ingress_with_source_security_group_id = [
-    {
-      from_port                = 1521
-      to_port                  = 1521
-      protocol                 = "tcp"
-      description              = "Frontend Tuxedo"
-      source_security_group_id = data.aws_security_group.tuxedo.id
-    },
-    {
-      from_port                = 1521
-      to_port                  = 1521
-      protocol                 = "tcp"
-      description              = "EWF Backend"
-      source_security_group_id = data.aws_security_group.ewf_bep.id
-    },
-    {
-      from_port                = 1521
-      to_port                  = 1521
-      protocol                 = "tcp"
-      description              = "Frontend Admin sites"
-      source_security_group_id = data.aws_security_group.adminsites.id
-    }
-  ]
+
+  ingress_with_source_security_group_id = local.rds_ingress_from_services
+
   computed_ingress_with_source_security_group_id = [
     {
       rule                     = "oracle-db-tcp"
