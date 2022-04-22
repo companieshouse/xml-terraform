@@ -57,24 +57,11 @@ data "aws_security_group" "nagios_shared" {
   }
 }
 
-data "aws_security_group" "ewf_bep" {
+data "aws_security_group" "rds_ingress" {
+  count = length(var.rds_ingress_groups)
   filter {
-    name   = "tag:Name"
-    values = ["sgr-ewf-bep-asg-*"]
-  }
-}
-
-data "aws_security_group" "tuxedo" {
-  filter {
-    name   = "tag:Name"
-    values = ["xml-frontend-tuxedo-${var.environment}"]
-  }
-}
-
-data "aws_security_group" "adminsites" {
-  filter {
-    name   = "tag:Name"
-    values = ["sgr-admin-sites-asg*"]
+    name   = "group-name"
+    values = [var.rds_ingress_groups[count.index]]
   }
 }
 
