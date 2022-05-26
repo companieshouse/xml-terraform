@@ -70,7 +70,8 @@ module "fe_asg" {
   name = "${var.application}-webserver"
   # Launch configuration
   lc_name       = "${var.application}-fe-launchconfig"
-  image_id      = data.aws_ami.fe_xml.id
+#  image_id      = data.aws_ami.fe_xml.id
+  image_id = "ami-0940695323f7a5ef8"
   instance_type = var.fe_instance_size
   security_groups = [
     module.xml_fe_asg_security_group.this_security_group_id,
