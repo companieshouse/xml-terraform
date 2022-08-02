@@ -21,21 +21,22 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_asg_alarms"></a> [asg\_alarms](#module\_asg\_alarms) | git@github.com:companieshouse/terraform-modules//aws/asg-cloudwatch-alarms?ref=tags/1.0.116 |  |
-| <a name="module_bep_asg"></a> [bep\_asg](#module\_bep\_asg) | git@github.com:companieshouse/terraform-modules//aws/terraform-aws-autoscaling?ref=tags/1.0.36 |  |
-| <a name="module_bep_asg_alarms"></a> [bep\_asg\_alarms](#module\_bep\_asg\_alarms) | git@github.com:companieshouse/terraform-modules//aws/asg-cloudwatch-alarms?ref=tags/1.0.116 |  |
+| <a name="module_asg_alarms"></a> [asg\_alarms](#module\_asg\_alarms) | git@github.com:companieshouse/terraform-modules//aws/asg-cloudwatch-alarms | tags/1.0.116 |
+| <a name="module_bep_asg"></a> [bep\_asg](#module\_bep\_asg) | git@github.com:companieshouse/terraform-modules//aws/terraform-aws-autoscaling | tags/1.0.36 |
+| <a name="module_bep_asg_alarms"></a> [bep\_asg\_alarms](#module\_bep\_asg\_alarms) | git@github.com:companieshouse/terraform-modules//aws/asg-cloudwatch-alarms | tags/1.0.116 |
 | <a name="module_cloudwatch_sns_notifications"></a> [cloudwatch\_sns\_notifications](#module\_cloudwatch\_sns\_notifications) | terraform-aws-modules/sns/aws | 3.3.0 |
 | <a name="module_cloudwatch_sns_ooh"></a> [cloudwatch\_sns\_ooh](#module\_cloudwatch\_sns\_ooh) | terraform-aws-modules/sns/aws | 3.3.0 |
-| <a name="module_fe_asg"></a> [fe\_asg](#module\_fe\_asg) | git@github.com:companieshouse/terraform-modules//aws/terraform-aws-autoscaling?ref=tags/1.0.36 |  |
+| <a name="module_fe_asg"></a> [fe\_asg](#module\_fe\_asg) | git@github.com:companieshouse/terraform-modules//aws/terraform-aws-autoscaling | tags/1.0.36 |
+| <a name="module_rds_start_stop_schedule"></a> [rds\_start\_stop\_schedule](#module\_rds\_start\_stop\_schedule) | git@github.com:companieshouse/terraform-modules//aws/rds_start_stop_schedule | tags/1.0.131 |
 | <a name="module_xml_bep_asg_security_group"></a> [xml\_bep\_asg\_security\_group](#module\_xml\_bep\_asg\_security\_group) | terraform-aws-modules/security-group/aws | ~> 3.0 |
-| <a name="module_xml_bep_profile"></a> [xml\_bep\_profile](#module\_xml\_bep\_profile) | git@github.com:companieshouse/terraform-modules//aws/instance_profile?ref=tags/1.0.59 |  |
+| <a name="module_xml_bep_profile"></a> [xml\_bep\_profile](#module\_xml\_bep\_profile) | git@github.com:companieshouse/terraform-modules//aws/instance_profile | tags/1.0.59 |
 | <a name="module_xml_external_alb"></a> [xml\_external\_alb](#module\_xml\_external\_alb) | terraform-aws-modules/alb/aws | ~> 5.0 |
-| <a name="module_xml_external_alb_alarms"></a> [xml\_external\_alb\_alarms](#module\_xml\_external\_alb\_alarms) | git@github.com:companieshouse/terraform-modules//aws/alb-cloudwatch-alarms?ref=tags/1.0.116 |  |
+| <a name="module_xml_external_alb_alarms"></a> [xml\_external\_alb\_alarms](#module\_xml\_external\_alb\_alarms) | git@github.com:companieshouse/terraform-modules//aws/alb-cloudwatch-alarms | tags/1.0.116 |
 | <a name="module_xml_external_alb_security_group"></a> [xml\_external\_alb\_security\_group](#module\_xml\_external\_alb\_security\_group) | terraform-aws-modules/security-group/aws | ~> 3.0 |
 | <a name="module_xml_fe_asg_security_group"></a> [xml\_fe\_asg\_security\_group](#module\_xml\_fe\_asg\_security\_group) | terraform-aws-modules/security-group/aws | ~> 3.0 |
-| <a name="module_xml_fe_profile"></a> [xml\_fe\_profile](#module\_xml\_fe\_profile) | git@github.com:companieshouse/terraform-modules//aws/instance_profile?ref=tags/1.0.59 |  |
+| <a name="module_xml_fe_profile"></a> [xml\_fe\_profile](#module\_xml\_fe\_profile) | git@github.com:companieshouse/terraform-modules//aws/instance_profile | tags/1.0.59 |
 | <a name="module_xml_internal_alb"></a> [xml\_internal\_alb](#module\_xml\_internal\_alb) | terraform-aws-modules/alb/aws | ~> 5.0 |
-| <a name="module_xml_internal_alb_alarms"></a> [xml\_internal\_alb\_alarms](#module\_xml\_internal\_alb\_alarms) | git@github.com:companieshouse/terraform-modules//aws/alb-cloudwatch-alarms?ref=tags/1.0.116 |  |
+| <a name="module_xml_internal_alb_alarms"></a> [xml\_internal\_alb\_alarms](#module\_xml\_internal\_alb\_alarms) | git@github.com:companieshouse/terraform-modules//aws/alb-cloudwatch-alarms | tags/1.0.116 |
 | <a name="module_xml_internal_alb_security_group"></a> [xml\_internal\_alb\_security\_group](#module\_xml\_internal\_alb\_security\_group) | terraform-aws-modules/security-group/aws | ~> 3.0 |
 | <a name="module_xml_rds"></a> [xml\_rds](#module\_xml\_rds) | terraform-aws-modules/rds/aws | 2.23.0 |
 | <a name="module_xml_rds_security_group"></a> [xml\_rds\_security\_group](#module\_xml\_rds\_security\_group) | terraform-aws-modules/security-group/aws | ~> 3.0 |
@@ -60,11 +61,9 @@
 | [aws_iam_role.rds_enhanced_monitoring](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_role) | data source |
 | [aws_kms_key.rds](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/kms_key) | data source |
 | [aws_route53_zone.private_zone](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/route53_zone) | data source |
-| [aws_security_group.adminsites](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/security_group) | data source |
-| [aws_security_group.ewf_bep](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/security_group) | data source |
 | [aws_security_group.nagios_shared](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/security_group) | data source |
+| [aws_security_group.rds_ingress](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/security_group) | data source |
 | [aws_security_group.rds_shared](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/security_group) | data source |
-| [aws_security_group.tuxedo](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/security_group) | data source |
 | [aws_subnet.web_details](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/subnet) | data source |
 | [aws_subnet_ids.application](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/subnet_ids) | data source |
 | [aws_subnet_ids.data](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/subnet_ids) | data source |
@@ -138,8 +137,12 @@
 | <a name="input_nfs_server"></a> [nfs\_server](#input\_nfs\_server) | The name or IP of the environment specific NFS server | `string` | `null` | no |
 | <a name="input_public_allow_cidr_blocks"></a> [public\_allow\_cidr\_blocks](#input\_public\_allow\_cidr\_blocks) | cidr block list for allowing inbound users from internet | `list(any)` | <pre>[<br>  "0.0.0.0/0"<br>]</pre> | no |
 | <a name="input_public_cidr_block"></a> [public\_cidr\_block](#input\_public\_cidr\_block) | cidr block for allowing inbound users from internet | `string` | `"0.0.0.0/0"` | no |
+| <a name="input_rds_ingress_groups"></a> [rds\_ingress\_groups](#input\_rds\_ingress\_groups) | A list of security group name patterns that will be allowed access to RDS | `list(string)` | `[]` | no |
 | <a name="input_rds_log_exports"></a> [rds\_log\_exports](#input\_rds\_log\_exports) | A list log types to export from RDS to Cloudwatch | `list(string)` | `[]` | no |
 | <a name="input_rds_onpremise_access"></a> [rds\_onpremise\_access](#input\_rds\_onpremise\_access) | A list of cidr ranges that will be allowed access to RDS | `list(any)` | `[]` | no |
+| <a name="input_rds_schedule_enable"></a> [rds\_schedule\_enable](#input\_rds\_schedule\_enable) | Controls whether a start/stop schedule will be created for the RDS instance (true) or not (false) | `bool` | `false` | no |
+| <a name="input_rds_start_schedule"></a> [rds\_start\_schedule](#input\_rds\_start\_schedule) | The SSM cron expression that defines when the RDS instance will be started | `string` | `""` | no |
+| <a name="input_rds_stop_schedule"></a> [rds\_stop\_schedule](#input\_rds\_stop\_schedule) | The SSM cron expression that defines when the RDS instance will be stopped | `string` | `""` | no |
 
 ## Outputs
 
