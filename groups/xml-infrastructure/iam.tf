@@ -107,7 +107,7 @@ data "aws_iam_policy_document" "ef_presenter_data_bucket_live" {
     ]
 
     resources = [
-      "arn:aws:kms:*:${data.vault_generic_secret.account_ids.data["live"]}:key/*"
+      "arn:aws:kms:*:${data.vault_generic_secret.account_ids.data["heritage-live"]}:key/*"
     ]
 
     condition {
@@ -146,7 +146,7 @@ data "aws_iam_policy_document" "ef_presenter_data_bucket_staging" {
     ]
 
     resources = [
-      "arn:aws:kms:*:${data.vault_generic_secret.account_ids.data["staging"]}:key/*"
+      "arn:aws:kms:*:${data.vault_generic_secret.account_ids.data["heritage-staging"]}:key/*"
     ]
 
     condition {
