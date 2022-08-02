@@ -172,7 +172,7 @@ data "aws_iam_policy_document" "ef_presenter_data_buckets" {
 resource "aws_iam_policy" "ef_presenter_data_buckets" {
   count = var.environment == "live" ? 1 : 0
 
-  name   = "ef_presenter_data_buckets"
+  name   = "ef-presenter-data-buckets"
   policy = data.aws_iam_policy_document.ef_presenter_data_buckets[0].json
 }
 
