@@ -179,6 +179,6 @@ resource "aws_iam_policy" "ef_presenter_data_buckets" {
 resource "aws_iam_role_policy_attachment" "ef_presenter_data_buckets" {
   count = var.environment == "live" ? 1 : 0
 
-  role       = module.xml_bep_profile.aws_iam_role.arn
+  role       = module.xml_bep_profile.aws_iam_role.name
   policy_arn = aws_iam_policy.ef_presenter_data_buckets[0].arn
 }
