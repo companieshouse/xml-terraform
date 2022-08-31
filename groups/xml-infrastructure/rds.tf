@@ -147,9 +147,9 @@ module "rds_start_stop_schedule" {
 
   rds_schedule_enable = var.rds_schedule_enable
 
-  rds_instance_id     = module.xml_rds.this_db_instance_id
-  rds_start_schedule  = var.rds_start_schedule
-  rds_stop_schedule   = var.rds_stop_schedule
+  rds_instance_id    = module.xml_rds.this_db_instance_id
+  rds_start_schedule = var.rds_start_schedule
+  rds_stop_schedule  = var.rds_stop_schedule
 }
 
 module "rds_cloudwatch_alarms" {
