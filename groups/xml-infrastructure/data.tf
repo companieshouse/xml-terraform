@@ -115,7 +115,8 @@ data "vault_generic_secret" "xml_fess_data" {
 }
 
 data "aws_acm_certificate" "acm_cert" {
-  domain = var.domain_name
+  domain      = var.domain_name
+  most_recent = true
 }
 
 data "vault_generic_secret" "kms_keys" {
