@@ -277,11 +277,6 @@ bep_cw_logs = {
     log_group_retention = 7
   }
 
-  "efimport.log" = {
-    file_path = "/home/xml"
-    log_group_retention = 7
-  }
-
   "emailDispatcher.log" = {
     file_path = "/home/xml"
     log_group_retention = 7

@@ -336,3 +336,10 @@ variable "bep_cw_logs" {
   description = "Map of log file information; used to create log groups, IAM permissions and passed to the application to configure remote logging"
   default     = {}
 }
+
+
+variable "ef_presenter_data_import" {
+  type        = bool
+  description = "A boolean value representing whether EF presenter data import is enabled or not for the environment being provisioned"
+  default     = false
+}

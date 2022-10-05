@@ -82,103 +82,16 @@ module "xml_bep_profile" {
   ]
 }
 
-data "aws_iam_policy_document" "ef_presenter_data_bucket_live" {
-  count = var.environment == "live" ? 1 : 0
+resource "aws_iam_policy" "ef_presenter_data_import" {
+  count = var.ef_presenter_data_import ? 1 : 0
 
-  statement {
-    sid = "AllowAccessToLiveEFPresenterDataBucket"
-
-    actions = [
-      "s3:Get*",
-      "s3:List*",
-    ]
-
-    resources = [
-      "arn:aws:s3:::ef-presenter-data.fil.tuxedo.heritage-live.ch.gov.uk/*",
-      "arn:aws:s3:::ef-presenter-data.fil.tuxedo.heritage-live.ch.gov.uk"
-    ]
-  }
-
-  statement {
-    sid = "AllowDecryptionUsingLiveEFPresenterDataKMSKey"
-
-    actions = [
-      "kms:Decrypt",
-    ]
-
-    resources = [
-      "arn:aws:kms:*:${data.vault_generic_secret.account_ids.data["heritage-live"]}:key/*"
-    ]
-
-    condition {
-      test     = "ForAnyValue:StringEquals"
-      variable = "kms:ResourceAliases"
-
-      values = [
-        "alias/fil-tuxedo-live",
-      ]
-    }
-  }
+  name   = "ef-presenter-data-import"
+  policy = data.aws_iam_policy_document.ef_presenter_data_import[0].json
 }
 
-data "aws_iam_policy_document" "ef_presenter_data_bucket_staging" {
-  count = var.environment == "live" ? 1 : 0
-
-  statement {
-    sid = "AllowAccessToStagingEFPresenterDataBucket"
-
-    actions = [
-      "s3:Get*",
-      "s3:List*",
-    ]
-
-    resources = [
-      "arn:aws:s3:::ef-presenter-data.fil.tuxedo.heritage-staging.ch.gov.uk/*",
-      "arn:aws:s3:::ef-presenter-data.fil.tuxedo.heritage-staging.ch.gov.uk"
-    ]
-  }
-
-  statement {
-    sid = "AllowDecryptionUsingStagingEFPresenterDataKMSKey"
-
-    actions = [
-      "kms:Decrypt",
-    ]
-
-    resources = [
-      "arn:aws:kms:*:${data.vault_generic_secret.account_ids.data["heritage-staging"]}:key/*"
-    ]
-
-    condition {
-      test     = "ForAnyValue:StringEquals"
-      variable = "kms:ResourceAliases"
-
-      values = [
-        "alias/fil-tuxedo-staging",
-      ]
-    }
-  }
-}
-
-data "aws_iam_policy_document" "ef_presenter_data_buckets" {
-  count = var.environment == "live" ? 1 : 0
-
-  source_policy_documents = [
-    data.aws_iam_policy_document.ef_presenter_data_bucket_live[0].json,
-    data.aws_iam_policy_document.ef_presenter_data_bucket_staging[0].json
-  ]
-}
-
-resource "aws_iam_policy" "ef_presenter_data_buckets" {
-  count = var.environment == "live" ? 1 : 0
-
-  name   = "ef-presenter-data-buckets"
-  policy = data.aws_iam_policy_document.ef_presenter_data_buckets[0].json
-}
-
-resource "aws_iam_role_policy_attachment" "ef_presenter_data_buckets" {
-  count = var.environment == "live" ? 1 : 0
+resource "aws_iam_role_policy_attachment" "ef_presenter_data_import" {
+  count = var.ef_presenter_data_import ? 1 : 0
 
   role       = module.xml_bep_profile.aws_iam_role.name
-  policy_arn = aws_iam_policy.ef_presenter_data_buckets[0].arn
+  policy_arn = aws_iam_policy.ef_presenter_data_import[0].arn
 }

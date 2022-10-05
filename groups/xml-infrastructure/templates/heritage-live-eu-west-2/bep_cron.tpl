@@ -49,7 +49,6 @@
 ####email poll reminders every morning at 4-30am
 30 4 * * * /home/xml/efbackend/emailPollReminder.sh >/dev/null 2>&1
 ####email unpolled submission report every Monday Morning at 5-30am
-#10 20 * * * /home/xml/efbackend/efimport.sh >/dev/null 2>&1
 #59 23 * * * /home/xml/efbackend/getFilingStats.pl xml >/dev/null 2>&1
 3 * * * * /home/xml/efbackend/xmlDigestCacheDelete.sh >/dev/null 2>&1
 ##ensure weeding runs AFTER archiving
@@ -65,6 +64,9 @@
 */1 * * * * /home/xml/supportscripts/checkformprocess.sh >/dev/null 2>&1
 4,34 * * * * /home/xml/supportscripts/filinqueuecheck.sh email 100 >/dev/null 2>&1
 0 8-17 * * * /home/xml/supportscripts/updateXMLFormDetail.sh >/dev/null 2>&1
+
+30 00 * * * /home/xml/efbackend/ef_presenter_data_import.sh ${ EF_PRESENTER_DATA_BUCKET } >/dev/null 2>&1
+
 #0 10 * * * /home/xml/supportscripts/failedCerts.sh >/dev/null 2>&1
 #05 10 * * * /home/xml/supportscripts/failedMortCerts.sh >/dev/null 2>&1
 #*/15 7-18 * * * /home/xml/supportscripts/status7TNEP.sh >/dev/null 2>&1
