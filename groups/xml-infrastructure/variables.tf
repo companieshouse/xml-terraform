@@ -337,7 +337,6 @@ variable "bep_cw_logs" {
   default     = {}
 }
 
-
 variable "ef_presenter_data_import" {
   type        = bool
   description = "A boolean value representing whether EF presenter data import is enabled or not for the environment being provisioned"
