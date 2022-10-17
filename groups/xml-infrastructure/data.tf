@@ -114,6 +114,11 @@ data "vault_generic_secret" "xml_fess_data" {
   path = "applications/${var.aws_account}-${var.aws_region}/${var.application}/fess"
 }
 
+data "vault_generic_secret" "ef_presenter_data_import" {
+  count = var.ef_presenter_data_import ? 1 : 0
+  path = "applications/${var.aws_account}-${var.aws_region}/${var.application}/ef-presenter-data-import"
+}
+
 data "aws_acm_certificate" "acm_cert" {
   domain      = var.domain_name
   most_recent = true
@@ -204,11 +209,11 @@ data "template_file" "bep_userdata" {
     HERITAGE_ENVIRONMENT = title(var.environment)
     XML_BACKEND_INPUTS   = local.xml_bep_data
     ANSIBLE_INPUTS       = jsonencode(local.xml_bep_ansible_inputs)
-    XML_CRON_ENTRIES = templatefile("${path.module}/templates/${var.aws_profile}/bep_cron.tpl", {
-      "USER"     = data.vault_generic_secret.xml_bep_cron_data.data["username"],
-      "PASSWORD" = data.vault_generic_secret.xml_bep_cron_data.data["password"]
-      }
+    XML_CRON_ENTRIES = templatefile(
+      "${path.module}/templates/${var.aws_profile}/bep_cron.tpl",
+      local.xml_cron_variables
     )
+
     XML_FESS_TOKEN = data.vault_generic_secret.xml_fess_data.data["fess_token"]
   }
 }
@@ -220,5 +225,48 @@ data "template_cloudinit_config" "bep_userdata_config" {
   part {
     content_type = "text/x-shellscript"
     content      = data.template_file.bep_userdata.rendered
+  }
+}
+
+data "aws_iam_policy_document" "ef_presenter_data_import" {
+  count = var.ef_presenter_data_import ? 1 : 0
+
+  dynamic "statement" {
+    for_each = local.ef_presenter_data_import
+
+    content {
+      actions = [
+        "s3:Get*",
+        "s3:List*",
+      ]
+
+      resources = [
+          "arn:aws:s3:::${statement.value.bucket_name}/*",
+          "arn:aws:s3:::${statement.value.bucket_name}"
+      ]
+    }
+  }
+
+  dynamic "statement" {
+    for_each = local.ef_presenter_data_import
+
+    content {
+      actions = [
+        "kms:Decrypt",
+      ]
+
+      resources = [
+        "arn:aws:kms:*:${data.vault_generic_secret.account_ids.data[statement.key]}:key/*"
+      ]
+
+      condition {
+        test     = "ForAnyValue:StringEquals"
+        variable = "kms:ResourceAliases"
+
+        values = [
+          statement.value.kms_key_alias
+        ]
+      }
+    }
   }
 }

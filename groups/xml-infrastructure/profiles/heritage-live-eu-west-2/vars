@@ -266,7 +266,7 @@ bep_cw_logs = {
     log_group_retention = 180
   }
 
-  "efimport.log" = {
+  "ef_presenter_data_import.log" = {
     file_path = "/home/xml"
     log_group_retention = 180
   }
@@ -331,3 +331,5 @@ bep_cw_logs = {
 alarm_actions_enabled  = true
 alarm_topic_name       = "Email_Alerts"
 alarm_topic_name_ooh   = "Phonecall_Alerts"
+
+ef_presenter_data_import = true

@@ -75,4 +75,16 @@ locals {
     Region      = var.aws_region
     Account     = var.aws_account
   }
+
+  ef_presenter_data_import = var.ef_presenter_data_import ? tomap(jsondecode(data.vault_generic_secret.ef_presenter_data_import[0].data_json)) : {}
+
+  ef_presenter_data_import_variables = var.ef_presenter_data_import ? {
+      "EF_PRESENTER_DATA_BUCKET" = local.ef_presenter_data_import[var.aws_account]["bucket_name"]
+  } : {}
+
+  xml_cron_variables = merge({
+    "USER"     = data.vault_generic_secret.xml_bep_cron_data.data["username"],
+    "PASSWORD" = data.vault_generic_secret.xml_bep_cron_data.data["password"]
+  },
+  local.ef_presenter_data_import_variables)
 }
