@@ -290,6 +290,12 @@ variable "public_allow_cidr_blocks" {
   description = "cidr block list for allowing inbound users from internet"
 }
 
+variable "test_access_enable" {
+  type        = bool
+  description = "Controls whether access from the Test subnets is required (true) or not (false)"
+  default     = false
+}
+
 # ------------------------------------------------------------------------------
 # XML Backend Variables
 # ------------------------------------------------------------------------------
