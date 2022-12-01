@@ -333,3 +333,5 @@ alarm_topic_name       = "Email_Alerts"
 alarm_topic_name_ooh   = "Phonecall_Alerts"
 
 ef_presenter_data_import = true
+
+test_access_enable = true

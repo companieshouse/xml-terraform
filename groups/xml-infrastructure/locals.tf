@@ -3,6 +3,7 @@
 # ------------------------------------------------------------------------
 locals {
   admin_cidrs  = values(data.vault_generic_secret.internal_cidrs.data)
+  test_cidrs   = var.test_access_enable ? jsondecode(data.vault_generic_secret.test_cidrs.data["cidrs"]) : []
   s3_releases  = data.vault_generic_secret.s3_releases.data
   xml_ec2_data = data.vault_generic_secret.xml_ec2_data.data
   xml_rds_data = data.vault_generic_secret.xml_rds_data.data

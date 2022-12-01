@@ -9,7 +9,7 @@ module "xml_internal_alb_security_group" {
   description = "Security group for the ${var.application} web servers"
   vpc_id      = data.aws_vpc.vpc.id
 
-  ingress_cidr_blocks = concat(local.admin_cidrs, local.websubnet_cidrs)
+  ingress_cidr_blocks = concat(local.admin_cidrs, local.websubnet_cidrs, local.test_cidrs)
   ingress_rules       = ["http-80-tcp", "https-443-tcp"]
   egress_rules        = ["all-all"]
 
