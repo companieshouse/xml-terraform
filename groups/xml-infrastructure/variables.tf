@@ -296,6 +296,12 @@ variable "test_access_enable" {
   default     = false
 }
 
+variable "test_concourse_access_enable" {
+  type        = bool
+  description = "Controls whether access from the Test Concourse subnets is required (true) or not (false)"
+  default     = false
+}
+
 # ------------------------------------------------------------------------------
 # XML Backend Variables
 # ------------------------------------------------------------------------------
