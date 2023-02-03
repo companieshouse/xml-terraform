@@ -94,6 +94,10 @@ data "vault_generic_secret" "test_cidrs" {
   path = "aws-accounts/network/shared-services/test_cidr_ranges"
 }
 
+data "vault_generic_secret" "test_concourse_cidrs" {
+  path = "aws-accounts/network/ch-development/test_concourse_cidr_ranges"
+}
+
 data "vault_generic_secret" "xml_rds_data" {
   path = "applications/${var.aws_profile}/${var.application}/rds"
 }

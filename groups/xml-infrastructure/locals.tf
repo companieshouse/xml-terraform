@@ -2,13 +2,14 @@
 # Locals
 # ------------------------------------------------------------------------
 locals {
-  admin_cidrs  = values(data.vault_generic_secret.internal_cidrs.data)
-  test_cidrs   = var.test_access_enable ? jsondecode(data.vault_generic_secret.test_cidrs.data["cidrs"]) : []
-  s3_releases  = data.vault_generic_secret.s3_releases.data
-  xml_ec2_data = data.vault_generic_secret.xml_ec2_data.data
-  xml_rds_data = data.vault_generic_secret.xml_rds_data.data
-  xml_fe_data  = data.vault_generic_secret.xml_fe_data.data_json
-  xml_bep_data = data.vault_generic_secret.xml_bep_data.data_json
+  admin_cidrs          = values(data.vault_generic_secret.internal_cidrs.data)
+  test_cidrs           = var.test_access_enable ? jsondecode(data.vault_generic_secret.test_cidrs.data["cidrs"]) : []
+  test_concourse_cidrs = jsondecode(data.vault_generic_secret.test_concourse_cidrs.data["cidrs"])
+  s3_releases          = data.vault_generic_secret.s3_releases.data
+  xml_ec2_data         = data.vault_generic_secret.xml_ec2_data.data
+  xml_rds_data         = data.vault_generic_secret.xml_rds_data.data
+  xml_fe_data          = data.vault_generic_secret.xml_fe_data.data_json
+  xml_bep_data         = data.vault_generic_secret.xml_bep_data.data_json
 
   kms_keys_data          = data.vault_generic_secret.kms_keys.data
   security_kms_keys_data = data.vault_generic_secret.security_kms_keys.data
@@ -24,7 +25,7 @@ locals {
 
   internal_fqdn = format("%s.%s.aws.internal", split("-", var.aws_account)[1], split("-", var.aws_account)[0])
 
-  rds_ingress_cidrs = concat(local.admin_cidrs, var.rds_onpremise_access)
+  rds_ingress_cidrs = concat(local.admin_cidrs, var.rds_onpremise_access, var.test_concourse_rds_access_enable ? local.test_concourse_cidrs : [])
   rds_ingress_from_services = flatten([
     for sg_data in data.aws_security_group.rds_ingress : {
       from_port                = 1521

@@ -296,6 +296,12 @@ variable "test_access_enable" {
   default     = false
 }
 
+variable "test_concourse_rds_access_enable" {
+  type        = bool
+  description = "Controls whether RDS access from the Test Concourse subnets is permitted (true) or not (false)"
+  default     = false
+}
+
 # ------------------------------------------------------------------------------
 # XML Backend Variables
 # ------------------------------------------------------------------------------
