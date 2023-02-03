@@ -342,5 +342,5 @@ alarm_actions_enabled  = false
 alarm_topic_name       = ""
 alarm_topic_name_ooh   = ""
 
-## Test Access
-test_concourse_access_enable = true
+## RDS Test Access
+test_concourse_rds_access_enable = true

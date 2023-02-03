@@ -296,9 +296,9 @@ variable "test_access_enable" {
   default     = false
 }
 
-variable "test_concourse_access_enable" {
+variable "test_concourse_rds_access_enable" {
   type        = bool
-  description = "Controls whether access from the Test Concourse subnets is required (true) or not (false)"
+  description = "Controls whether RDS access from the Test Concourse subnets is permitted (true) or not (false)"
   default     = false
 }
 
