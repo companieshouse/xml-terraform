@@ -13,6 +13,7 @@ locals {
 
   kms_keys_data          = data.vault_generic_secret.kms_keys.data
   security_kms_keys_data = data.vault_generic_secret.security_kms_keys.data
+  account_ssm_key_arn    = local.kms_keys_data["ssm"]
   logs_kms_key_id        = local.kms_keys_data["logs"]
   sns_kms_key_id         = local.kms_keys_data["sns"]
   ssm_kms_key_id         = local.security_kms_keys_data["session-manager-kms-key-arn"]
@@ -89,4 +90,15 @@ locals {
     "PASSWORD" = data.vault_generic_secret.xml_bep_cron_data.data["password"]
   },
   local.ef_presenter_data_import_variables)
+
+  parameter_store_path_prefix = "/${var.application}/${var.environment}"
+
+  parameter_store_secrets = {
+    frontend_inputs         = local.xml_fe_data
+    frontend_ansible_inputs = jsonencode(local.xml_fe_ansible_inputs)
+    backend_inputs          = local.xml_bep_data
+    backend_ansible_inputs  = jsonencode(local.xml_bep_ansible_inputs)
+    backend_cron_entries    = data.template_file.xml_cron_file.rendered
+    backend_fess_token      = data.vault_generic_secret.xml_fess_data.data["fess_token"]
+  }
 }

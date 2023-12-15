@@ -170,10 +170,10 @@ data "template_file" "fe_userdata" {
   template = file("${path.module}/templates/fe_user_data.tpl")
 
   vars = {
-    REGION               = var.aws_region
-    HERITAGE_ENVIRONMENT = title(var.environment)
-    XML_FRONTEND_INPUTS  = local.xml_fe_data
-    ANSIBLE_INPUTS       = jsonencode(local.xml_fe_ansible_inputs)
+    REGION                   = var.aws_region
+    HERITAGE_ENVIRONMENT     = title(var.environment)
+    XML_FRONTEND_INPUTS_PATH = "${local.parameter_store_path_prefix}/frontend_inputs"
+    ANSIBLE_INPUTS_PATH      = "${local.parameter_store_path_prefix}/frontend_ansible_inputs"
   }
 }
 
@@ -209,20 +209,21 @@ data "aws_ami" "bep_xml" {
   }
 }
 
+data "template_file" "xml_cron_file" {
+  template = file("${path.module}/templates/${var.aws_profile}/bep_cron.tpl")
+  vars     = local.xml_cron_variables
+}
+
 data "template_file" "bep_userdata" {
   template = file("${path.module}/templates/bep_user_data.tpl")
 
   vars = {
-    REGION               = var.aws_region
-    HERITAGE_ENVIRONMENT = title(var.environment)
-    XML_BACKEND_INPUTS   = local.xml_bep_data
-    ANSIBLE_INPUTS       = jsonencode(local.xml_bep_ansible_inputs)
-    XML_CRON_ENTRIES = templatefile(
-      "${path.module}/templates/${var.aws_profile}/bep_cron.tpl",
-      local.xml_cron_variables
-    )
-
-    XML_FESS_TOKEN = data.vault_generic_secret.xml_fess_data.data["fess_token"]
+    REGION                  = var.aws_region
+    HERITAGE_ENVIRONMENT    = title(var.environment)
+    XML_BACKEND_INPUTS_PATH = "${local.parameter_store_path_prefix}/backend_inputs"
+    ANSIBLE_INPUTS_PATH     = "${local.parameter_store_path_prefix}/backend_ansible_inputs"
+    XML_CRON_ENTRIES_PATH   = "${local.parameter_store_path_prefix}/backend_cron_entries"
+    XML_FESS_TOKEN_PATH     = "${local.parameter_store_path_prefix}/backend_fess_token"
   }
 }
 
