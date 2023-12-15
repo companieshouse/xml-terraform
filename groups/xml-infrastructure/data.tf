@@ -172,6 +172,7 @@ data "template_file" "fe_userdata" {
   vars = {
     REGION                   = var.aws_region
     HERITAGE_ENVIRONMENT     = title(var.environment)
+    APP_VERSION              = var.fe_app_release_version
     XML_FRONTEND_INPUTS_PATH = "${local.parameter_store_path_prefix}/frontend_inputs"
     ANSIBLE_INPUTS_PATH      = "${local.parameter_store_path_prefix}/frontend_ansible_inputs"
   }
@@ -220,6 +221,7 @@ data "template_file" "bep_userdata" {
   vars = {
     REGION                  = var.aws_region
     HERITAGE_ENVIRONMENT    = title(var.environment)
+    APP_VERSION             = var.bep_app_release_version
     XML_BACKEND_INPUTS_PATH = "${local.parameter_store_path_prefix}/backend_inputs"
     ANSIBLE_INPUTS_PATH     = "${local.parameter_store_path_prefix}/backend_ansible_inputs"
     XML_CRON_ENTRIES_PATH   = "${local.parameter_store_path_prefix}/backend_cron_entries"
