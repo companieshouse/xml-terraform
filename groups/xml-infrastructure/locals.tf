@@ -98,7 +98,7 @@ locals {
     frontend_ansible_inputs = jsonencode(local.xml_fe_ansible_inputs)
     backend_inputs          = local.xml_bep_data
     backend_ansible_inputs  = jsonencode(local.xml_bep_ansible_inputs)
-    backend_cron_entries    = data.template_file.xml_cron_file.rendered
+    backend_cron_entries    = base64gzip(data.template_file.xml_cron_file.rendered)
     backend_fess_token      = data.vault_generic_secret.xml_fess_data.data["fess_token"]
   }
 }
