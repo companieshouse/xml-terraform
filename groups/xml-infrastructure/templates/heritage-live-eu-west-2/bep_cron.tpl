@@ -65,7 +65,7 @@
 4,34 * * * * /home/xml/supportscripts/filinqueuecheck.sh email 100 >/dev/null 2>&1
 0 8-17 * * * /home/xml/supportscripts/updateXMLFormDetail.sh >/dev/null 2>&1
 
-30 00 * * * /home/xml/efbackend/ef_presenter_data_import.sh ${ EF_PRESENTER_DATA_BUCKET } live-presenter-data-$(date --date="-1 day" '+\%Y-\%m-\%d') >/dev/null 2>&1
+30 00 * * * /home/xml/efbackend/ef_presenter_data_import.sh ${ EF_PRESENTER_DATA_BUCKET } live-presenter-data-$(date --date="-1 day" '+%Y-%m-%d') >/dev/null 2>&1
 
 #0 10 * * * /home/xml/supportscripts/failedCerts.sh >/dev/null 2>&1
 #05 10 * * * /home/xml/supportscripts/failedMortCerts.sh >/dev/null 2>&1
