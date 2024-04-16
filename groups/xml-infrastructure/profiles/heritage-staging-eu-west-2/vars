@@ -89,6 +89,12 @@ license_model               = "license-included"
 auto_minor_version_upgrade  = false
 
 # RDS Access
+rds_cloud_access = {
+  mesos_euw2a = "10.65.2.0/24",
+  mesos_euw2b = "10.65.66.0/24",
+  mesos_euw2c = "10.65.130.0/24"
+}
+
 rds_onpremise_access = [
   "192.168.90.0/24"
 ]
