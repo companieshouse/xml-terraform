@@ -144,6 +144,10 @@ data "vault_generic_secret" "security_s3_buckets" {
   path = "aws-accounts/security/s3"
 }
 
+data "aws_ec2_managed_prefix_list" "concourse" {
+  name = "shared-services-management-cidrs"
+}
+
 # ------------------------------------------------------------------------------
 # EWF Frontend data
 # ------------------------------------------------------------------------------
