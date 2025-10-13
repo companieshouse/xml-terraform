@@ -120,7 +120,7 @@ data "vault_generic_secret" "xml_fess_data" {
 
 data "vault_generic_secret" "ef_presenter_data_import" {
   count = var.ef_presenter_data_import ? 1 : 0
-  path = "applications/${var.aws_account}-${var.aws_region}/${var.application}/ef-presenter-data-import"
+  path  = "applications/${var.aws_account}-${var.aws_region}/${var.application}/ef-presenter-data-import"
 }
 
 data "aws_acm_certificate" "acm_cert" {
@@ -256,8 +256,8 @@ data "aws_iam_policy_document" "ef_presenter_data_import" {
       ]
 
       resources = [
-          "arn:aws:s3:::${statement.value.bucket_name}/*",
-          "arn:aws:s3:::${statement.value.bucket_name}"
+        "arn:aws:s3:::${statement.value.bucket_name}/*",
+        "arn:aws:s3:::${statement.value.bucket_name}"
       ]
     }
   }

@@ -76,10 +76,6 @@ rds_cloud_access = {
 
 rds_concourse_access = true
 
-rds_onpremise_access = [
-  "192.168.90.0/24"
-]
-
 rds_ingress_groups = [
   "xml-frontend-tuxedo-development*",
   "sgr-ewf-bep-*",

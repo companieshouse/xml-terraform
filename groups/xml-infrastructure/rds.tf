@@ -64,7 +64,6 @@ resource "aws_security_group_rule" "concourse_ingress" {
 }
 
 resource "aws_security_group_rule" "admin_ingress_db" {
-  count             = var.test_concourse_rds_access_enable ? 1 : 0
 
   description       = "Permit Oracle DB access from admin prefix list"
   type              = "ingress"
@@ -76,14 +75,37 @@ resource "aws_security_group_rule" "admin_ingress_db" {
 }
 
 resource "aws_security_group_rule" "admin_ingress_oem" {
-  count             = var.test_concourse_rds_access_enable ? 1 : 0
 
-  description       = "Permit Oracle Enterprise Manager access from admin ranges"
+  description       = "Permit Oracle Enterprise Manager access from admin prefix list"
   type              = "ingress"
   from_port         = 5500
   to_port           = 5500
   protocol          = "tcp"
   prefix_list_ids   = [data.aws_ec2_managed_prefix_list.admin.id]
+  security_group_id = module.xml_rds_security_group.this_security_group_id
+}
+
+resource "aws_security_group_rule" "test_concourse_ingress_db" {
+  count = var.test_concourse_rds_access_enable ? 1 : 0
+
+  description       = "Ingress from test Concourse"
+  type              = "ingress"
+  from_port         = 1521
+  to_port           = 1521
+  protocol          = "tcp"
+  cidr_blocks       = local.test_concourse_cidrs
+  security_group_id = module.xml_rds_security_group.this_security_group_id
+}
+
+resource "aws_security_group_rule" "test_concourse_ingress_oem" {
+  count = var.test_concourse_rds_access_enable ? 1 : 0
+
+  description       = "Permit Oracle Enterprise Manager access from test Concourse"
+  type              = "ingress"
+  from_port         = 5500
+  to_port           = 5500
+  protocol          = "tcp"
+  cidr_blocks       = local.test_concourse_cidrs
   security_group_id = module.xml_rds_security_group.this_security_group_id
 }
 
@@ -182,10 +204,10 @@ module "rds_start_stop_schedule" {
 module "rds_cloudwatch_alarms" {
   source = "git@github.com:companieshouse/terraform-modules//aws/oracledb_cloudwatch_alarms?ref=tags/1.0.173"
 
-  db_instance_id         = module.xml_rds.this_db_instance_id
-  db_instance_shortname  = upper(var.application)
-  alarm_actions_enabled  = var.alarm_actions_enabled
-  alarm_name_prefix      = "Oracle RDS"
-  alarm_topic_name       = var.alarm_topic_name
-  alarm_topic_name_ooh   = var.alarm_topic_name_ooh
+  db_instance_id        = module.xml_rds.this_db_instance_id
+  db_instance_shortname = upper(var.application)
+  alarm_actions_enabled = var.alarm_actions_enabled
+  alarm_name_prefix     = "Oracle RDS"
+  alarm_topic_name      = var.alarm_topic_name
+  alarm_topic_name_ooh  = var.alarm_topic_name_ooh
 }
