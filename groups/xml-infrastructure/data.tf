@@ -86,10 +86,6 @@ data "vault_generic_secret" "s3_releases" {
   path = "aws-accounts/shared-services/s3"
 }
 
-data "vault_generic_secret" "internal_cidrs" {
-  path = "aws-accounts/network/internal_cidr_ranges"
-}
-
 data "vault_generic_secret" "test_cidrs" {
   path = "aws-accounts/network/shared-services/test_cidr_ranges"
 }
@@ -146,6 +142,10 @@ data "vault_generic_secret" "security_s3_buckets" {
 
 data "aws_ec2_managed_prefix_list" "concourse" {
   name = "shared-services-management-cidrs"
+}
+
+data "aws_ec2_managed_prefix_list" "admin" {
+  name = "administration-cidr-ranges"
 }
 
 # ------------------------------------------------------------------------------
