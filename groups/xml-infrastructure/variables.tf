@@ -157,12 +157,6 @@ variable "rds_concourse_access" {
   default     = false
 }
 
-variable "rds_onpremise_access" {
-  type        = list(any)
-  description = "A list of cidr ranges that will be allowed access to RDS"
-  default     = []
-}
-
 variable "rds_ingress_groups" {
   type        = list(string)
   description = "A list of security group name patterns that will be allowed access to RDS"

@@ -2,7 +2,6 @@
 # Locals
 # ------------------------------------------------------------------------
 locals {
-  admin_cidrs          = values(data.vault_generic_secret.internal_cidrs.data)
   test_cidrs           = var.test_access_enable ? jsondecode(data.vault_generic_secret.test_cidrs.data["cidrs"]) : []
   test_concourse_cidrs = jsondecode(data.vault_generic_secret.test_concourse_cidrs.data["cidrs"])
   s3_releases          = data.vault_generic_secret.s3_releases.data
@@ -28,7 +27,6 @@ locals {
 
   internal_fqdn = format("%s.%s.aws.internal", split("-", var.aws_account)[1], split("-", var.aws_account)[0])
 
-  rds_ingress_cidrs = concat(local.admin_cidrs, var.rds_onpremise_access, var.test_concourse_rds_access_enable ? local.test_concourse_cidrs : [])
   rds_ingress_from_services = flatten([
     for sg_data in data.aws_security_group.rds_ingress : {
       from_port                = 1521
@@ -84,13 +82,13 @@ locals {
   ef_presenter_data_import = var.ef_presenter_data_import ? tomap(jsondecode(data.vault_generic_secret.ef_presenter_data_import[0].data_json)) : {}
 
   ef_presenter_data_import_variables = var.ef_presenter_data_import ? {
-      "EF_PRESENTER_DATA_BUCKET" = local.ef_presenter_data_import[var.aws_account]["bucket_name"]
+    "EF_PRESENTER_DATA_BUCKET" = local.ef_presenter_data_import[var.aws_account]["bucket_name"]
   } : {}
 
   xml_cron_variables = merge({
     "USER"     = data.vault_generic_secret.xml_bep_cron_data.data["username"],
     "PASSWORD" = data.vault_generic_secret.xml_bep_cron_data.data["password"]
-  },
+    },
   local.ef_presenter_data_import_variables)
 
   parameter_store_path_prefix = "/${var.application}/${var.environment}"

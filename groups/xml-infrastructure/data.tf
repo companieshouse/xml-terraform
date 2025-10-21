@@ -86,10 +86,6 @@ data "vault_generic_secret" "s3_releases" {
   path = "aws-accounts/shared-services/s3"
 }
 
-data "vault_generic_secret" "internal_cidrs" {
-  path = "aws-accounts/network/internal_cidr_ranges"
-}
-
 data "vault_generic_secret" "test_cidrs" {
   path = "aws-accounts/network/shared-services/test_cidr_ranges"
 }
@@ -124,7 +120,7 @@ data "vault_generic_secret" "xml_fess_data" {
 
 data "vault_generic_secret" "ef_presenter_data_import" {
   count = var.ef_presenter_data_import ? 1 : 0
-  path = "applications/${var.aws_account}-${var.aws_region}/${var.application}/ef-presenter-data-import"
+  path  = "applications/${var.aws_account}-${var.aws_region}/${var.application}/ef-presenter-data-import"
 }
 
 data "aws_acm_certificate" "acm_cert" {
@@ -146,6 +142,10 @@ data "vault_generic_secret" "security_s3_buckets" {
 
 data "aws_ec2_managed_prefix_list" "concourse" {
   name = "shared-services-management-cidrs"
+}
+
+data "aws_ec2_managed_prefix_list" "admin" {
+  name = "administration-cidr-ranges"
 }
 
 # ------------------------------------------------------------------------------
@@ -256,8 +256,8 @@ data "aws_iam_policy_document" "ef_presenter_data_import" {
       ]
 
       resources = [
-          "arn:aws:s3:::${statement.value.bucket_name}/*",
-          "arn:aws:s3:::${statement.value.bucket_name}"
+        "arn:aws:s3:::${statement.value.bucket_name}/*",
+        "arn:aws:s3:::${statement.value.bucket_name}"
       ]
     }
   }
