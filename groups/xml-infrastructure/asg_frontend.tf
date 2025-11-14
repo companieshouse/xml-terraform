@@ -43,7 +43,7 @@ resource "aws_cloudwatch_log_group" "xml_fe" {
 resource "aws_autoscaling_schedule" "fe-schedule-stop" {
   count = var.environment == "live" ? 0 : 1
 
-  scheduled_action_name  = "${var.aws_account}-${var.application}-bep-scheduled-shutdown"
+  scheduled_action_name  = "${var.aws_account}-${var.application}-fe-scheduled-shutdown"
   min_size               = 0
   max_size               = 0
   desired_capacity       = 0
@@ -55,7 +55,7 @@ resource "aws_autoscaling_schedule" "fe-schedule-stop" {
 resource "aws_autoscaling_schedule" "fe-schedule-start" {
   count = var.environment == "live" ? 0 : 1
 
-  scheduled_action_name  = "${var.aws_account}-${var.application}-bep-scheduled-startup"
+  scheduled_action_name  = "${var.aws_account}-${var.application}-fe-scheduled-startup"
   min_size               = var.fe_min_size
   max_size               = var.fe_max_size
   desired_capacity       = var.fe_desired_capacity
