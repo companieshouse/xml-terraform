@@ -110,10 +110,6 @@ data "vault_generic_secret" "xml_bep_data" {
   path = "applications/${var.aws_account}-${var.aws_region}/${var.application}/backend"
 }
 
-data "vault_generic_secret" "xml_bep_cron_data" {
-  path = "applications/${var.aws_account}-${var.aws_region}/${var.application}/cron"
-}
-
 data "vault_generic_secret" "xml_fess_data" {
   path = "applications/${var.aws_account}-${var.aws_region}/${var.application}/fess"
 }
@@ -216,7 +212,7 @@ data "aws_ami" "bep_xml" {
 
 data "template_file" "xml_cron_file" {
   template = file("${path.module}/templates/${var.aws_profile}/bep_cron.tpl")
-  vars     = local.xml_cron_variables
+  vars     = local.ef_presenter_data_import_variables
 }
 
 data "template_file" "bep_userdata" {
