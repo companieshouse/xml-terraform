@@ -90,8 +90,6 @@ locals {
     "EF_PRESENTER_DATA_BUCKET" = local.ef_presenter_data_import[var.aws_account]["bucket_name"]
   } : {}
 
-  local.ef_presenter_data_import_variables)
-
   parameter_store_path_prefix = "/${var.application}/${var.environment}"
 
   bep_finance_nfs_parameter_store_secrets = var.bep_mount_finance_nfs_share ? {
