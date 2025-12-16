@@ -54,12 +54,12 @@ nfs_mounts = {
     ewf_recent_filings = {
       local_mount_point = "/mnt/nfs/filings/recent_filings"
     }
-  }
+}
 
-  nfs_finance_mounts = {
-    upload = {
-    local_mount_point = "/mnt/nfs/e5_upload"
-  }
+nfs_finance_mounts = {
+    upload = { local_mount_point = "/mnt/nfs/e5_upload" 
+    }
+}
 
 # RDS Instance settings
 instance_class          = "db.m5.large"

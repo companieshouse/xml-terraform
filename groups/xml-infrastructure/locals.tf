@@ -10,9 +10,9 @@ locals {
   xml_rds_data         = data.vault_generic_secret.xml_rds_data.data
   xml_fe_data          = data.vault_generic_secret.xml_fe_data.data_json
   xml_bep_data         = data.vault_generic_secret.xml_bep_data.data_json
-  xml_user      = "xml"
-  finance_gid   = "1003"
-  finance_group = "e5fsadmin"
+  xml_user             = "xml"
+  finance_gid          = "1003"
+  finance_group        = "e5fsadmin"
 
   dba_dev_cidrs_list = jsondecode(data.vault_generic_secret.xml_rds_data.data_json)["dba-dev-cidrs"]
 
@@ -89,33 +89,33 @@ locals {
   ef_presenter_data_import = var.ef_presenter_data_import ? tomap(jsondecode(data.vault_generic_secret.ef_presenter_data_import[0].data_json)) : {}
 
   ef_presenter_data_import_variables = var.ef_presenter_data_import ? {
-      "EF_PRESENTER_DATA_BUCKET" = local.ef_presenter_data_import[var.aws_account]["bucket_name"]
+    "EF_PRESENTER_DATA_BUCKET" = local.ef_presenter_data_import[var.aws_account]["bucket_name"]
   } : {}
 
   xml_cron_variables = merge({
     "USER"     = data.vault_generic_secret.xml_bep_cron_data.data["username"],
     "PASSWORD" = data.vault_generic_secret.xml_bep_cron_data.data["password"]
-  },
+    },
   local.ef_presenter_data_import_variables)
 
   parameter_store_path_prefix = "/${var.application}/${var.environment}"
 
-bep_finance_nfs_parameter_store_secrets = var.bep_mount_finance_nfs_share ? {
-  backend_finance_mount = base64gzip(data.template_file.finance_fstab_entry[0].rendered)
-  backend_xml_user      = local.xml_user
-  backend_finance_gid   = local.finance_gid
-  backend_finance_group = local.finance_group
-} : {}
+  bep_finance_nfs_parameter_store_secrets = var.bep_mount_finance_nfs_share ? {
+    backend_finance_mount = base64gzip(data.template_file.finance_fstab_entry[0].rendered)
+    backend_xml_user      = local.xml_user
+    backend_finance_gid   = local.finance_gid
+    backend_finance_group = local.finance_group
+  } : {}
 
   parameter_store_secrets = merge(
     {
-    frontend_inputs         = local.xml_fe_data
-    frontend_ansible_inputs = jsonencode(local.xml_fe_ansible_inputs)
-    backend_inputs          = local.xml_bep_data
-    backend_ansible_inputs  = jsonencode(local.xml_bep_ansible_inputs)
-    backend_cron_entries    = base64gzip(data.template_file.xml_cron_file.rendered)
-    backend_fess_token      = data.vault_generic_secret.xml_fess_data.data["fess_token"]
-  },
-  local.bep_finance_nfs_parameter_store_secrets
+      frontend_inputs         = local.xml_fe_data
+      frontend_ansible_inputs = jsonencode(local.xml_fe_ansible_inputs)
+      backend_inputs          = local.xml_bep_data
+      backend_ansible_inputs  = jsonencode(local.xml_bep_ansible_inputs)
+      backend_cron_entries    = base64gzip(data.template_file.xml_cron_file.rendered)
+      backend_fess_token      = data.vault_generic_secret.xml_fess_data.data["fess_token"]
+    },
+    local.bep_finance_nfs_parameter_store_secrets
   )
 }
