@@ -85,6 +85,12 @@ variable "nfs_server" {
   default     = null
 }
 
+variable "nfs_finance_server" {
+  type        = string
+  description = "The name or IP of the environment specific NFS server"
+  default     = null
+}
+
 variable "nfs_mount_destination_parent_dir" {
   type        = string
   description = "The parent folder that all NFS shares should be mounted inside on the EC2 instance"
@@ -97,6 +103,20 @@ variable "nfs_mounts" {
   default = {
     SH_NFSTest = {                  # The name of the NFS Share from the NFS Server
       local_mount_point = "folder", # The name of the local folder to mount to if the share name is not wanted
+      mount_options = [             # Traditional mount options as documented for any NFS Share mounts
+        "rw",
+        "wsize=8192"
+      ]
+    }
+  }
+}
+
+variable "nfs_finance_mounts" {
+  type        = map(any)
+  description = "A map of objects which contains mount details for each mount path required."
+  default = {
+    SH_NFSTest = {                  # The name of the NFS Share from the NFS Server
+      local_mount_point = "folder", # The name of the local folder to mount to if the share name is not wante
       mount_options = [             # Traditional mount options as documented for any NFS Share mounts
         "rw",
         "wsize=8192"
@@ -155,12 +175,6 @@ variable "rds_concourse_access" {
   type        = bool
   description = "A boolean value indicating whether to allow Concourse ingress to the RDS database"
   default     = false
-}
-
-variable "rds_onpremise_access" {
-  type        = list(any)
-  description = "A list of cidr ranges that will be allowed access to RDS"
-  default     = []
 }
 
 variable "rds_ingress_groups" {
@@ -370,4 +384,10 @@ variable "ef_presenter_data_import" {
   type        = bool
   description = "A boolean value representing whether EF presenter data import is enabled or not for the environment being provisioned"
   default     = false
+}
+
+variable "bep_mount_finance_nfs_share" {
+  default     = false
+  description = "Defines whether the finance share should be mounted"
+  type        = bool
 }

@@ -86,10 +86,6 @@ data "vault_generic_secret" "s3_releases" {
   path = "aws-accounts/shared-services/s3"
 }
 
-data "vault_generic_secret" "internal_cidrs" {
-  path = "aws-accounts/network/internal_cidr_ranges"
-}
-
 data "vault_generic_secret" "test_cidrs" {
   path = "aws-accounts/network/shared-services/test_cidr_ranges"
 }
@@ -114,17 +110,13 @@ data "vault_generic_secret" "xml_bep_data" {
   path = "applications/${var.aws_account}-${var.aws_region}/${var.application}/backend"
 }
 
-data "vault_generic_secret" "xml_bep_cron_data" {
-  path = "applications/${var.aws_account}-${var.aws_region}/${var.application}/cron"
-}
-
 data "vault_generic_secret" "xml_fess_data" {
   path = "applications/${var.aws_account}-${var.aws_region}/${var.application}/fess"
 }
 
 data "vault_generic_secret" "ef_presenter_data_import" {
   count = var.ef_presenter_data_import ? 1 : 0
-  path = "applications/${var.aws_account}-${var.aws_region}/${var.application}/ef-presenter-data-import"
+  path  = "applications/${var.aws_account}-${var.aws_region}/${var.application}/ef-presenter-data-import"
 }
 
 data "aws_acm_certificate" "acm_cert" {
@@ -146,6 +138,10 @@ data "vault_generic_secret" "security_s3_buckets" {
 
 data "aws_ec2_managed_prefix_list" "concourse" {
   name = "shared-services-management-cidrs"
+}
+
+data "aws_ec2_managed_prefix_list" "admin" {
+  name = "administration-cidr-ranges"
 }
 
 # ------------------------------------------------------------------------------
@@ -216,7 +212,13 @@ data "aws_ami" "bep_xml" {
 
 data "template_file" "xml_cron_file" {
   template = file("${path.module}/templates/${var.aws_profile}/bep_cron.tpl")
-  vars     = local.xml_cron_variables
+  vars     = local.ef_presenter_data_import_variables
+}
+
+data "template_file" "finance_fstab_entry" {
+  count = var.bep_mount_finance_nfs_share ? 1 : 0
+
+  template = file("${path.module}/templates/${var.aws_profile}/finance_nfs.tpl")
 }
 
 data "template_file" "bep_userdata" {
@@ -256,8 +258,8 @@ data "aws_iam_policy_document" "ef_presenter_data_import" {
       ]
 
       resources = [
-          "arn:aws:s3:::${statement.value.bucket_name}/*",
-          "arn:aws:s3:::${statement.value.bucket_name}"
+        "arn:aws:s3:::${statement.value.bucket_name}/*",
+        "arn:aws:s3:::${statement.value.bucket_name}"
       ]
     }
   }

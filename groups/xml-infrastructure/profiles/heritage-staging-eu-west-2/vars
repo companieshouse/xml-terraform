@@ -31,8 +31,12 @@ bep_max_size = 1
 bep_desired_capacity = 1
 
 # CVO Mounts
-nfs_server = "192.168.255.24"
+nfs_server = "cvodata-n2.staging.heritage.aws.internal"
+nfs_finance_server = "cvodata.staging.finance.aws.internal"
+
 nfs_mount_destination_parent_dir = "/-"
+nfs_finance_mount_destination_parent_dir = "/finance_staging_e5fs/data/"
+
 nfs_mounts = {
     # AWS NFS
     ewf_image = {
@@ -50,7 +54,12 @@ nfs_mounts = {
     ewf_recent_filings = {
       local_mount_point = "/mnt/nfs/filings/recent_filings"
     }
-  }
+}
+
+nfs_finance_mounts = {
+    upload = { local_mount_point = "/mnt/nfs/e5_upload" 
+    }
+}
 
 # RDS Instance settings
 instance_class          = "db.m5.large"
@@ -73,10 +82,6 @@ rds_cloud_access = {
   mesos_euw2b = "10.65.66.0/24",
   mesos_euw2c = "10.65.130.0/24"
 }
-
-rds_onpremise_access = [
-  "192.168.90.0/24"
-]
 
 rds_ingress_groups = [
   "xml-frontend-tuxedo-staging*",
@@ -351,3 +356,5 @@ alarm_topic_name_ooh   = ""
 
 ## RDS Test Access
 test_concourse_rds_access_enable = true
+
+bep_mount_finance_nfs_share = true
