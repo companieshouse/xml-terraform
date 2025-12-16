@@ -105,13 +105,15 @@ module "fe_asg" {
   iam_instance_profile           = module.xml_fe_profile.aws_iam_instance_profile.name
   user_data_base64               = data.template_cloudinit_config.fe_userdata_config.rendered
 
-  tags = merge(
-      local.default_tags,
-      {
-        Name        = "${var.application}-webserver"
-        ServiceTeam = "${upper(var.application)}-FE-Support"
-      }
-    )
+  tags = [
+  merge(
+    local.default_tags,
+    {
+      Name        = "${var.application}-webserver"
+      ServiceTeam = "${upper(var.application)}-FE-Support"
+    }
+  )
+]
   
   depends_on = [
     module.xml_external_alb,

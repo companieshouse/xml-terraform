@@ -15,5 +15,5 @@ resource "aws_route53_record" "xml_rds" {
   name    = "${var.application}db"
   type    = "CNAME"
   ttl     = "300"
-  records = [module.xml_rds.this_db_instance_address]
+  records = [module.xml_rds.db_instance_identifier]
 }

@@ -28,7 +28,7 @@ data "aws_subnets" "web" {
   }
 }
 
-data "aws_subnets" "web_details" {
+data "aws_subnet" "web_details" {
   for_each = data.aws_subnets.web.ids
   id       = each.value
 }

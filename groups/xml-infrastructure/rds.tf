@@ -114,7 +114,7 @@ resource "aws_security_group_rule" "test_concourse_ingress_oem" {
 # ------------------------------------------------------------------------------
 module "xml_rds" {
   source  = "terraform-aws-modules/rds/aws"
-  version = "2.23.0" # Pinned version to ensure updates are a choice, can be upgraded if new features are available and required.
+  version = "6.13.1" # Pinned version to ensure updates are a choice, can be upgraded if new features are available and required.
 
   create_db_parameter_group = "true"
   create_db_subnet_group    = "true"
@@ -131,7 +131,7 @@ module "xml_rds" {
   storage_encrypted          = true
   kms_key_id                 = data.aws_kms_key.rds.arn
 
-  name     = upper(var.application)
+  db_name     = upper(var.application)
   username = local.xml_rds_data["admin-username"]
   password = local.xml_rds_data["admin-password"]
   port     = "1521"
@@ -141,7 +141,7 @@ module "xml_rds" {
   backup_window             = var.rds_backup_window
   backup_retention_period   = var.backup_retention_period
   skip_final_snapshot       = "false"
-  final_snapshot_identifier = "${var.application}-final-deletion-snapshot"
+  final_snapshot_identifier_prefix = "${var.application}-final-deletion-snapshot"
   publicly_accessible       = false
 
   # Enhanced Monitoring
@@ -197,7 +197,7 @@ module "rds_start_stop_schedule" {
 
   rds_schedule_enable = var.rds_schedule_enable
 
-  rds_instance_id    = module.xml_rds.this_db_instance_id
+  rds_instance_id    = module.xml_rds.db_instance_identifier
   rds_start_schedule = var.rds_start_schedule
   rds_stop_schedule  = var.rds_stop_schedule
 }
@@ -205,7 +205,7 @@ module "rds_start_stop_schedule" {
 module "rds_cloudwatch_alarms" {
   source = "git@github.com:companieshouse/terraform-modules//aws/oracledb_cloudwatch_alarms?ref=tags/1.0.363"
 
-  db_instance_id        = module.xml_rds.this_db_instance_id
+  db_instance_id        = module.xml_rds.db_instance_identifier
   db_instance_shortname = upper(var.application)
   alarm_actions_enabled = var.alarm_actions_enabled
   alarm_name_prefix     = "Oracle RDS"
