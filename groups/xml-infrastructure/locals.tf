@@ -75,10 +75,10 @@ locals {
   default_tags = {
     Terraform   = "true"
     Application = upper(var.application)
-    Region      = var.aws_region
-    Account     = var.aws_account
+    Repository      = "xml-terraform"
+    Environment     = var.environment
   }
-
+  
   ef_presenter_data_import = var.ef_presenter_data_import ? tomap(jsondecode(data.vault_generic_secret.ef_presenter_data_import[0].data_json)) : {}
 
   ef_presenter_data_import_variables = var.ef_presenter_data_import ? {

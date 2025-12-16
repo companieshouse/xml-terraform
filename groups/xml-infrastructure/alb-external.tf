@@ -28,7 +28,7 @@ module "xml_external_alb" {
   enable_deletion_protection = true
 
   security_groups = [module.xml_external_alb_security_group.this_security_group_id]
-  subnets         = data.aws_subnet_ids.public.ids
+  subnets         = data.aws_subnets.public.ids
 
   access_logs = {
     bucket  = local.elb_access_logs_bucket_name
@@ -78,18 +78,18 @@ module "xml_external_alb" {
   ]
 
   tags = merge(
-    local.default_tags,
-    map(
-      "ServiceTeam", "${upper(var.application)}-FE-Support"
+      local.default_tags,
+      {
+        Name        = "alb-${var.application}-external-001"
+        ServiceTeam = "${upper(var.application)}-FE-Support"
+      }
     )
-  )
-}
-
+  }
 #--------------------------------------------
 # External ALB CloudWatch Alarms
 #--------------------------------------------
 module "xml_external_alb_alarms" {
-  source = "git@github.com:companieshouse/terraform-modules//aws/alb-cloudwatch-alarms?ref=tags/1.0.116"
+  source = "git@github.com:companieshouse/terraform-modules//aws/alb-cloudwatch-alarms?ref=tags/1.0.363"
 
   alb_arn_suffix            = module.xml_external_alb.this_lb_arn_suffix
   target_group_arn_suffixes = module.xml_external_alb.target_group_arn_suffixes

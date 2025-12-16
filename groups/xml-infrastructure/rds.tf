@@ -162,7 +162,7 @@ module "xml_rds" {
   ]
 
   # DB subnet group
-  subnet_ids = data.aws_subnet_ids.data.ids
+  subnet_ids = data.aws_subnets.data.ids
 
   # DB Parameter group
   family = join("-", ["oracle-se2", var.major_engine_version])
@@ -184,15 +184,16 @@ module "xml_rds" {
   }
 
   tags = merge(
-    local.default_tags,
-    map(
-      "ServiceTeam", "${upper(var.application)}-DBA-Support"
+      local.default_tags,
+      {
+        Name        = upper(var.application)
+        ServiceTeam = "${upper(var.application)}-DBA-Support"
+      }
     )
-  )
-}
+  }
 
 module "rds_start_stop_schedule" {
-  source = "git@github.com:companieshouse/terraform-modules//aws/rds_start_stop_schedule?ref=tags/1.0.131"
+  source = "git@github.com:companieshouse/terraform-modules//aws/rds_start_stop_schedule?ref=tags/1.0.363"
 
   rds_schedule_enable = var.rds_schedule_enable
 
@@ -202,7 +203,7 @@ module "rds_start_stop_schedule" {
 }
 
 module "rds_cloudwatch_alarms" {
-  source = "git@github.com:companieshouse/terraform-modules//aws/oracledb_cloudwatch_alarms?ref=tags/1.0.173"
+  source = "git@github.com:companieshouse/terraform-modules//aws/oracledb_cloudwatch_alarms?ref=tags/1.0.363"
 
   db_instance_id        = module.xml_rds.this_db_instance_id
   db_instance_shortname = upper(var.application)

@@ -30,7 +30,7 @@ module "xml_internal_alb" {
   enable_deletion_protection = true
 
   security_groups = [module.xml_internal_alb_security_group.this_security_group_id]
-  subnets         = data.aws_subnet_ids.web.ids
+  subnets         = data.aws_subnets.web.ids
 
   access_logs = {
     bucket  = local.elb_access_logs_bucket_name
@@ -80,18 +80,19 @@ module "xml_internal_alb" {
   ]
 
   tags = merge(
-    local.default_tags,
-    map(
-      "ServiceTeam", "${upper(var.application)}-FE-Support"
+      local.default_tags,
+      {
+        Name        = "alb-${var.application}-internal-001"
+        ServiceTeam = "${upper(var.application)}-FE-Support"
+      }
     )
-  )
-}
+  }
 
 #--------------------------------------------
 # Internal ALB CloudWatch Alarms
 #--------------------------------------------
 module "xml_internal_alb_alarms" {
-  source = "git@github.com:companieshouse/terraform-modules//aws/alb-cloudwatch-alarms?ref=tags/1.0.116"
+  source = "git@github.com:companieshouse/terraform-modules//aws/alb-cloudwatch-alarms?ref=tags/1.0.363"
 
   alb_arn_suffix            = module.xml_internal_alb.this_lb_arn_suffix
   target_group_arn_suffixes = module.xml_internal_alb.target_group_arn_suffixes
