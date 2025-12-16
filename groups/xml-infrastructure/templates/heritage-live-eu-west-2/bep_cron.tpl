@@ -75,7 +75,7 @@
 ##################################### STATS GENERATION START #############################
 55 6 * * * /home/xml/efbackend/produceStats.sh FiveDayProcessingReportEW "internalstats@companieshouse.gov.uk" 2wkago_5to5_working_days_ew >/dev/null 2>&1
 30 2 1 * * /home/xml/efbackend/produceStats.sh XMLPresenterTotalReport "sreadman@companieshouse.gov.uk, internalstats@companieshouse.gov.uk" month >/dev/null 2>&1
-20 20 * * * /home/xml/efbackend/produceFTPStats.sh XMLAccountPaymentsReport 172.16.200.33 ${ USER } ${ PASSWORD } 8to8 >/dev/null 2>&1
+20 20 * * * /home/xml/efbackend/produceFTPStats.sh XMLAccountPaymentsReport 8to8 >/dev/null 2>&1
 45 23 * * * /home/xml/efbackend/authLastFiled.sh > /tmp/sb.txt 2>&1
 30 1 1 * * /home/xml/efbackend/produceStats.sh XMLPresenterAcceptReport "sreadman@companieshouse.gov.uk,cyoude@companieshouse.gov.uk" month >/dev/null 2>&1
 55 6 1 * * /home/xml/efbackend/produceStats.sh XMLPresenterRejectReport "sreadman@companieshouse.gov.uk,cyoude@companieshouse.gov.uk" month >/dev/null 2>&1
@@ -89,7 +89,7 @@
 # MAW. 08/09/2015: Now this next line is just to produce a copy of the one above, so that is can be processed for Catherine Youde
 # the ftp details are obviously rubbish as it does not get copied anywhere just gets left in /mnt/nfs/ewf/archive/ewf/data/archive/statsReport/
 # this is the file that then gets processed by a script (ppXMLPresenterRejectReport.pl) to de-duplicate the reject reasons for Catherine.
-56 6 1 * * /home/xml/efbackend/produceFTPStats.sh XMLPresenterRejectReport 172.16.200.33 ${ USER } ${ PASSWORD } month >/dev/null 2>&1
+56 6 1 * * /home/xml/efbackend/produceFTPStats.sh XMLPresenterRejectReport month >/dev/null 2>&1
 50 6-18 * * * /home/xml/efbackend/produceStats.sh HourlyGeneralDocStatsReport "dcornelius@companieshouse.gov.uk,internalstats@companieshouse.gov.uk" now  >/dev/null 2>&1
 5 5 1 * * /home/xml/efbackend/produceStats.sh HMRCDownloadReport "ACINotify@companieshouse.gov.uk" month  >/dev/null 2>&1
 #########################################################################################
