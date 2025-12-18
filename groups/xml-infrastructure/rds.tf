@@ -14,12 +14,12 @@ module "xml_rds_security_group" {
   computed_ingress_with_source_security_group_id = [
     {
       rule                     = "oracle-db-tcp"
-      source_security_group_id = module.xml_fe_asg_security_group.this_security_group_id
+      source_security_group_id = module.xml_fe_asg_security_group.security_group_id
       description              = "Allow frontends to connect to RDS"
     },
     {
       rule                     = "oracle-db-tcp"
-      source_security_group_id = module.xml_bep_asg_security_group.this_security_group_id
+      source_security_group_id = module.xml_bep_asg_security_group.security_group_id
       description              = "Allow backend to connect to RDS"
     }
   ]
@@ -37,7 +37,7 @@ resource "aws_security_group_rule" "rds_cloud_ingress" {
   to_port           = 1521
   protocol          = "tcp"
   cidr_blocks       = [each.value]
-  security_group_id = module.xml_rds_security_group.this_security_group_id
+  security_group_id = module.xml_rds_security_group.security_group_id
 }
 
 resource "aws_security_group_rule" "dba_dev_ingress" {
@@ -48,7 +48,7 @@ resource "aws_security_group_rule" "dba_dev_ingress" {
   to_port           = 1521
   protocol          = "tcp"
   cidr_blocks       = [each.value]
-  security_group_id = module.xml_rds_security_group.this_security_group_id
+  security_group_id = module.xml_rds_security_group.security_group_id
 }
 
 resource "aws_security_group_rule" "concourse_ingress" {
@@ -60,7 +60,7 @@ resource "aws_security_group_rule" "concourse_ingress" {
   to_port           = 1521
   protocol          = "tcp"
   prefix_list_ids   = [data.aws_ec2_managed_prefix_list.concourse.id]
-  security_group_id = module.xml_rds_security_group.this_security_group_id
+  security_group_id = module.xml_rds_security_group.security_group_id
 }
 
 resource "aws_security_group_rule" "admin_ingress_db" {
@@ -71,7 +71,7 @@ resource "aws_security_group_rule" "admin_ingress_db" {
   to_port           = 1521
   protocol          = "tcp"
   prefix_list_ids   = [data.aws_ec2_managed_prefix_list.admin.id]
-  security_group_id = module.xml_rds_security_group.this_security_group_id
+  security_group_id = module.xml_rds_security_group.security_group_id
 }
 
 resource "aws_security_group_rule" "admin_ingress_oem" {
@@ -82,7 +82,7 @@ resource "aws_security_group_rule" "admin_ingress_oem" {
   to_port           = 5500
   protocol          = "tcp"
   prefix_list_ids   = [data.aws_ec2_managed_prefix_list.admin.id]
-  security_group_id = module.xml_rds_security_group.this_security_group_id
+  security_group_id = module.xml_rds_security_group.security_group_id
 }
 
 resource "aws_security_group_rule" "test_concourse_ingress_db" {
@@ -94,7 +94,7 @@ resource "aws_security_group_rule" "test_concourse_ingress_db" {
   to_port           = 1521
   protocol          = "tcp"
   cidr_blocks       = local.test_concourse_cidrs
-  security_group_id = module.xml_rds_security_group.this_security_group_id
+  security_group_id = module.xml_rds_security_group.security_group_id
 }
 
 resource "aws_security_group_rule" "test_concourse_ingress_oem" {
@@ -106,7 +106,7 @@ resource "aws_security_group_rule" "test_concourse_ingress_oem" {
   to_port           = 5500
   protocol          = "tcp"
   cidr_blocks       = local.test_concourse_cidrs
-  security_group_id = module.xml_rds_security_group.this_security_group_id
+  security_group_id = module.xml_rds_security_group.security_group_id
 }
 
 # ------------------------------------------------------------------------------
@@ -157,7 +157,7 @@ module "xml_rds" {
 
   # RDS Security Group
   vpc_security_group_ids = [
-    module.xml_rds_security_group.this_security_group_id,
+    module.xml_rds_security_group.security_group_id,
     data.aws_security_group.rds_shared.id
   ]
 
@@ -173,7 +173,7 @@ module "xml_rds" {
     {
       option_name                    = "OEM"
       port                           = "5500"
-      vpc_security_group_memberships = [module.xml_rds_security_group.this_security_group_id]
+      vpc_security_group_memberships = [module.xml_rds_security_group.security_group_id]
     }
   ], var.option_group_settings)
 

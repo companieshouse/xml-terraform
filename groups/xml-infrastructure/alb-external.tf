@@ -3,7 +3,7 @@
 # ------------------------------------------------------------------------------
 module "xml_external_alb_security_group" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 3.0"
+  version = "~> 5.3.1"
 
   name        = "sgr-${var.application}-alb-001"
   description = "Security group for the ${var.application} web servers"
@@ -19,7 +19,7 @@ module "xml_external_alb_security_group" {
 #--------------------------------------------
 module "xml_external_alb" {
   source  = "terraform-aws-modules/alb/aws"
-  version = "~> 5.0"
+  version = "~> 10.4.0"
 
   name                       = "alb-${var.application}-external-001"
   vpc_id                     = data.aws_vpc.vpc.id
@@ -27,7 +27,7 @@ module "xml_external_alb" {
   load_balancer_type         = "application"
   enable_deletion_protection = true
 
-  security_groups = [module.xml_external_alb_security_group.this_security_group_id]
+  security_groups = [module.xml_external_alb_security_group.security_group_id]
   subnets         = data.aws_subnets.public.ids
 
   access_logs = {
