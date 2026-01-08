@@ -93,7 +93,7 @@ module "bep_asg" {
   iam_instance_profile           = module.xml_bep_profile.aws_iam_instance_profile.name
   user_data_base64               = data.template_cloudinit_config.bep_userdata_config.rendered
 
-    tags = [
+ tags = [
   merge(
     local.default_tags,
     {
@@ -102,8 +102,7 @@ module "bep_asg" {
     }
   )
 ]
-  }
-
+}
 #--------------------------------------------
 # BEP ASG CloudWatch Alarms
 #--------------------------------------------
