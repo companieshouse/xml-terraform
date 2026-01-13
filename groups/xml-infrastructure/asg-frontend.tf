@@ -105,21 +105,26 @@ module "fe_asg" {
   iam_instance_profile           = module.xml_fe_profile.aws_iam_instance_profile.name
   user_data_base64               = data.template_cloudinit_config.fe_userdata_config.rendered
 
-  tags = [
-  merge(
+  tags = flatten([
+  for k, v in merge(
     local.default_tags,
     {
       Name        = "${var.application}-webserver"
       ServiceTeam = "${upper(var.application)}-FE-Support"
     }
-  )
-]
+  ) : {
+    key                 = k
+    value               = v
+    propagate_at_launch = true
+  }
+])
   
   depends_on = [
     module.xml_external_alb,
     module.xml_internal_alb
   ]
 }
+
 
 #--------------------------------------------
 # FE ASG CloudWatch Alarms
