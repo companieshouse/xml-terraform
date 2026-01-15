@@ -66,7 +66,7 @@ resource "aws_autoscaling_schedule" "fe-schedule-start" {
 
 # ASG Module
 module "fe_asg" {
-  source = "git@github.com:companieshouse/terraform-modules//aws/terraform-aws-autoscaling?ref=tags/1.0.363"
+  source = "git@github.com:companieshouse/terraform-modules//aws/terraform-aws-autoscaling?ref=tags/1.0.354"
 
   name = "${var.application}-webserver"
   # Launch configuration
@@ -118,13 +118,11 @@ module "fe_asg" {
     propagate_at_launch = true
   }
 ])
-  
   depends_on = [
     module.xml_external_alb,
     module.xml_internal_alb
   ]
 }
-
 
 #--------------------------------------------
 # FE ASG CloudWatch Alarms
