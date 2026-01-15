@@ -155,6 +155,9 @@ module "xml_rds" {
 
   ca_cert_identifier = "rds-ca-rsa2048-g1"
 
+  option_group_description = "Option group for ${join("-", ["rds", var.application, var.environment, "001"])}"
+  parameter_group_description = "Database parameter group for ${join("-", ["rds", var.application, var.environment, "001"])}"
+  
   # RDS Security Group
   vpc_security_group_ids = [
     module.xml_rds_security_group.security_group_id,
