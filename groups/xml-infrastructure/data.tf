@@ -122,10 +122,6 @@ data "vault_generic_secret" "xml_bep_data" {
   path = "applications/${var.aws_account}-${var.aws_region}/${var.application}/backend"
 }
 
-data "vault_generic_secret" "xml_bep_cron_data" {
-  path = "applications/${var.aws_account}-${var.aws_region}/${var.application}/cron"
-}
-
 data "vault_generic_secret" "xml_fess_data" {
   path = "applications/${var.aws_account}-${var.aws_region}/${var.application}/fess"
 }
@@ -228,7 +224,13 @@ data "aws_ami" "bep_xml" {
 
 data "template_file" "xml_cron_file" {
   template = file("${path.module}/templates/${var.aws_profile}/bep_cron.tpl")
-  vars     = local.xml_cron_variables
+  vars     = local.ef_presenter_data_import_variables
+}
+
+data "template_file" "finance_fstab_entry" {
+  count = var.bep_mount_finance_nfs_share ? 1 : 0
+
+  template = file("${path.module}/templates/${var.aws_profile}/finance_nfs.tpl")
 }
 
 data "template_file" "bep_userdata" {
@@ -242,6 +244,10 @@ data "template_file" "bep_userdata" {
     ANSIBLE_INPUTS_PATH     = "${local.parameter_store_path_prefix}/backend_ansible_inputs"
     XML_CRON_ENTRIES_PATH   = "${local.parameter_store_path_prefix}/backend_cron_entries"
     XML_FESS_TOKEN_PATH     = "${local.parameter_store_path_prefix}/backend_fess_token"
+    XML_FINANCE_MOUNT_PATH  = "${local.parameter_store_path_prefix}/backend_finance_mount"
+    XML_BE_USER             = "${local.parameter_store_path_prefix}/backend_xml_user"
+    FINANCE_BE_GID          = "${local.parameter_store_path_prefix}/backend_finance_gid"
+    FINANCE_BE_GROUP        = "${local.parameter_store_path_prefix}/backend_finance_group"
   }
 }
 
