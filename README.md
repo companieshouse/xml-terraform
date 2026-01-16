@@ -7,3 +7,29 @@ This will be deployed to Dev, Staging and Live so the Terraform code is generic 
 
 ### groups/ceu-infrastructure
 Contains any existing resources created in AWS for the XML Application, additional resources can be added as and when required.
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+No requirements.
+
+## Providers
+
+No providers.
+
+## Modules
+
+No modules.
+
+## Resources
+
+No resources.
+
+## Inputs
+
+No inputs.
+
+## Outputs
+
+No outputs.
+<!-- END_TF_DOCS -->
