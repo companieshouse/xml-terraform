@@ -96,11 +96,9 @@ module "bep_asg" {
  tags_as_map = merge(
     local.default_tags,
     {
-      Name        = "${var.application}-bep"
-      ServiceTeam = "${upper(var.application)}-FE-Support"
+      ServiceTeam = "${upper(var.application)}-FE-Support" 
     }
-  )
-}
+ )
 
 #--------------------------------------------
 # BEP ASG CloudWatch Alarms
