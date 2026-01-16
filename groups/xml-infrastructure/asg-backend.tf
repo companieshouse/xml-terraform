@@ -20,13 +20,13 @@ resource "aws_cloudwatch_log_group" "xml_bep" {
   kms_key_id        = lookup(each.value, "kms_key_id", local.logs_kms_key_id)
 
   tags = merge(
-      local.default_tags,
-      {
-        Name        = each.value["log_group_name"]
-        ServiceTeam = "${upper(var.application)}-FE-Support"
-      }
-    )
-  }
+    local.default_tags,
+    {
+      Name        = each.value["log_group_name"]
+      ServiceTeam = "${upper(var.application)}-FE-Support"
+    }
+  )
+}
 
 # ASG Scheduled Shutdown for non-production
 resource "aws_autoscaling_schedule" "bep-schedule-stop" {
@@ -93,12 +93,12 @@ module "bep_asg" {
   iam_instance_profile           = module.xml_bep_profile.aws_iam_instance_profile.name
   user_data_base64               = data.template_cloudinit_config.bep_userdata_config.rendered
 
- tags_as_map = merge(
+  tags_as_map = merge(
     local.default_tags,
     {
-      ServiceTeam = "${upper(var.application)}-FE-Support" 
+      ServiceTeam = "${upper(var.application)}-FE-Support"
     }
- )
+  )
 }
 #--------------------------------------------
 # BEP ASG CloudWatch Alarms

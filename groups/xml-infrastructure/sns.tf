@@ -9,13 +9,13 @@ module "cloudwatch_sns_notifications" {
   kms_master_key_id = local.sns_kms_key_id
 
   tags = merge(
-      local.default_tags,
-      {
-        Name        = "${var.application}-cloudwatch-emails"
-        ServiceTeam = "${upper(var.application)}-FE-Support"
-      }
-    )
-  }
+    local.default_tags,
+    {
+      Name        = "${var.application}-cloudwatch-emails"
+      ServiceTeam = "${upper(var.application)}-FE-Support"
+    }
+  )
+}
 
 module "cloudwatch_sns_ooh" {
   count = var.enable_sns_topic ? 1 : 0
@@ -28,10 +28,10 @@ module "cloudwatch_sns_ooh" {
   kms_master_key_id = local.sns_kms_key_id
 
   tags = merge(
-      local.default_tags,
-      {
-        Name        = "${var.application}-cloudwatch-ooh-only"
-        ServiceTeam = "${upper(var.application)}-FE-Support"
-      }
-    )
-  }
+    local.default_tags,
+    {
+      Name        = "${var.application}-cloudwatch-ooh-only"
+      ServiceTeam = "${upper(var.application)}-FE-Support"
+    }
+  )
+}

@@ -78,13 +78,13 @@ module "xml_external_alb" {
   ]
 
   tags = merge(
-      local.default_tags,
-      {
-        Name        = "alb-${var.application}-external-001"
-        ServiceTeam = "${upper(var.application)}-FE-Support"
-      }
-    )
-  }
+    local.default_tags,
+    {
+      Name        = "alb-${var.application}-external-001"
+      ServiceTeam = "${upper(var.application)}-FE-Support"
+    }
+  )
+}
 #--------------------------------------------
 # External ALB CloudWatch Alarms
 #--------------------------------------------

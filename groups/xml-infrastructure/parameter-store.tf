@@ -7,10 +7,10 @@ resource "aws_ssm_parameter" "parameters" {
   key_id = local.account_ssm_key_arn
 
   tags = merge(
-      local.default_tags,
-      {
-        Name        = "${local.parameter_store_path_prefix}/${each.key}"
-        
-      }
-    )
-  }
+    local.default_tags,
+    {
+      Name = "${local.parameter_store_path_prefix}/${each.key}"
+
+    }
+  )
+}

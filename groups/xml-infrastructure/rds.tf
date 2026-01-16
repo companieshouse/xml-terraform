@@ -131,18 +131,18 @@ module "xml_rds" {
   storage_encrypted          = true
   kms_key_id                 = data.aws_kms_key.rds.arn
 
-  db_name     = upper(var.application)
+  db_name  = upper(var.application)
   username = local.xml_rds_data["admin-username"]
   password = local.xml_rds_data["admin-password"]
   port     = "1521"
 
-  deletion_protection       = true
-  maintenance_window        = var.rds_maintenance_window
-  backup_window             = var.rds_backup_window
-  backup_retention_period   = var.backup_retention_period
-  skip_final_snapshot       = "false"
+  deletion_protection              = true
+  maintenance_window               = var.rds_maintenance_window
+  backup_window                    = var.rds_backup_window
+  backup_retention_period          = var.backup_retention_period
+  skip_final_snapshot              = "false"
   final_snapshot_identifier_prefix = "${var.application}-final-deletion-snapshot"
-  publicly_accessible       = false
+  publicly_accessible              = false
 
   # Enhanced Monitoring
   monitoring_interval             = "30"
@@ -155,9 +155,9 @@ module "xml_rds" {
 
   ca_cert_identifier = "rds-ca-rsa2048-g1"
 
-  option_group_description = "Option group for ${join("-", ["rds", var.application, var.environment, "001"])}"
+  option_group_description    = "Option group for ${join("-", ["rds", var.application, var.environment, "001"])}"
   parameter_group_description = "Database parameter group for ${join("-", ["rds", var.application, var.environment, "001"])}"
-  
+
   # RDS Security Group
   vpc_security_group_ids = [
     module.xml_rds_security_group.security_group_id,
@@ -187,13 +187,13 @@ module "xml_rds" {
   }
 
   tags = merge(
-      local.default_tags,
-      {
-        Name        = upper(var.application)
-        ServiceTeam = "${upper(var.application)}-DBA-Support"
-      }
-    )
-  }
+    local.default_tags,
+    {
+      Name        = upper(var.application)
+      ServiceTeam = "${upper(var.application)}-DBA-Support"
+    }
+  )
+}
 
 module "rds_start_stop_schedule" {
   source = "git@github.com:companieshouse/terraform-modules//aws/rds_start_stop_schedule?ref=tags/1.0.363"

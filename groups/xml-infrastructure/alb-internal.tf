@@ -80,13 +80,13 @@ module "xml_internal_alb" {
   ]
 
   tags = merge(
-      local.default_tags,
-      {
-        Name        = "alb-${var.application}-internal-001"
-        ServiceTeam = "${upper(var.application)}-FE-Support"
-      }
-    )
-  }
+    local.default_tags,
+    {
+      Name        = "alb-${var.application}-internal-001"
+      ServiceTeam = "${upper(var.application)}-FE-Support"
+    }
+  )
+}
 
 #--------------------------------------------
 # Internal ALB CloudWatch Alarms
