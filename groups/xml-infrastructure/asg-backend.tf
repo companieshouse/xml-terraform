@@ -99,7 +99,7 @@ module "bep_asg" {
       ServiceTeam = "${upper(var.application)}-FE-Support" 
     }
  )
-
+}
 #--------------------------------------------
 # BEP ASG CloudWatch Alarms
 #--------------------------------------------
