@@ -3,7 +3,7 @@
 # ------------------------------------------------------------------------------
 module "xml_external_alb_security_group" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 3.0"
+  version = "~> 5.3.1"
 
   name        = "sgr-${var.application}-alb-001"
   description = "Security group for the ${var.application} web servers"
@@ -19,7 +19,7 @@ module "xml_external_alb_security_group" {
 #--------------------------------------------
 module "xml_external_alb" {
   source  = "terraform-aws-modules/alb/aws"
-  version = "~> 5.0"
+  version = "~> 6.7.0"
 
   name                       = "alb-${var.application}-external-001"
   vpc_id                     = data.aws_vpc.vpc.id
@@ -27,8 +27,8 @@ module "xml_external_alb" {
   load_balancer_type         = "application"
   enable_deletion_protection = true
 
-  security_groups = [module.xml_external_alb_security_group.this_security_group_id]
-  subnets         = data.aws_subnet_ids.public.ids
+  security_groups = [module.xml_external_alb_security_group.security_group_id]
+  subnets         = data.aws_subnets.public.ids
 
   access_logs = {
     bucket  = local.elb_access_logs_bucket_name
@@ -79,19 +79,19 @@ module "xml_external_alb" {
 
   tags = merge(
     local.default_tags,
-    map(
-      "ServiceTeam", "${upper(var.application)}-FE-Support"
-    )
+    {
+      Name        = "alb-${var.application}-external-001"
+      ServiceTeam = "${upper(var.application)}-FE-Support"
+    }
   )
 }
-
 #--------------------------------------------
 # External ALB CloudWatch Alarms
 #--------------------------------------------
 module "xml_external_alb_alarms" {
-  source = "git@github.com:companieshouse/terraform-modules//aws/alb-cloudwatch-alarms?ref=tags/1.0.116"
+  source = "git@github.com:companieshouse/terraform-modules//aws/alb-cloudwatch-alarms?ref=tags/1.0.363"
 
-  alb_arn_suffix            = module.xml_external_alb.this_lb_arn_suffix
+  alb_arn_suffix            = module.xml_external_alb.lb_arn_suffix
   target_group_arn_suffixes = module.xml_external_alb.target_group_arn_suffixes
 
   prefix                    = "xml-external-frontend-"

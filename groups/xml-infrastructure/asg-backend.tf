@@ -3,7 +3,7 @@
 # ------------------------------------------------------------------------------
 module "xml_bep_asg_security_group" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 3.0"
+  version = "~> 5.3.1"
 
   name        = "sgr-${var.application}-bep-asg-001"
   description = "Security group for the ${var.application} backend asg"
@@ -21,9 +21,10 @@ resource "aws_cloudwatch_log_group" "xml_bep" {
 
   tags = merge(
     local.default_tags,
-    map(
-      "ServiceTeam", "${upper(var.application)}-FE-Support"
-    )
+    {
+      Name        = each.value["log_group_name"]
+      ServiceTeam = "${upper(var.application)}-FE-Support"
+    }
   )
 }
 
@@ -53,7 +54,7 @@ resource "aws_autoscaling_schedule" "bep-schedule-start" {
 
 # ASG Module
 module "bep_asg" {
-  source = "git@github.com:companieshouse/terraform-modules//aws/terraform-aws-autoscaling?ref=tags/1.0.36"
+  source = "git@github.com:companieshouse/terraform-modules//aws/terraform-aws-autoscaling?ref=tags/1.0.354"
 
   name = "${var.application}-bep"
   # Launch configuration
@@ -61,7 +62,7 @@ module "bep_asg" {
   image_id      = data.aws_ami.bep_xml.id
   instance_type = var.bep_instance_size
   security_groups = [
-    module.xml_bep_asg_security_group.this_security_group_id,
+    module.xml_bep_asg_security_group.security_group_id,
     data.aws_security_group.nagios_shared.id
   ]
 
@@ -76,7 +77,7 @@ module "bep_asg" {
   ]
   # Auto scaling group
   asg_name                       = "${var.application}-bep-asg"
-  vpc_zone_identifier            = data.aws_subnet_ids.application.ids
+  vpc_zone_identifier            = data.aws_subnets.application.ids
   health_check_type              = "EC2"
   min_size                       = var.bep_min_size
   max_size                       = var.bep_max_size
@@ -94,18 +95,16 @@ module "bep_asg" {
 
   tags_as_map = merge(
     local.default_tags,
-    map(
-      "ServiceTeam", "${upper(var.application)}-FE-Support"
-    )
+    {
+      ServiceTeam = "${upper(var.application)}-FE-Support"
+    }
   )
 }
-
-
 #--------------------------------------------
 # BEP ASG CloudWatch Alarms
 #--------------------------------------------
 module "bep_asg_alarms" {
-  source = "git@github.com:companieshouse/terraform-modules//aws/asg-cloudwatch-alarms?ref=tags/1.0.116"
+  source = "git@github.com:companieshouse/terraform-modules//aws/asg-cloudwatch-alarms?ref=tags/1.0.363"
 
   autoscaling_group_name = module.bep_asg.this_autoscaling_group_name
   prefix                 = "${var.application}-bep-asg-alarms"

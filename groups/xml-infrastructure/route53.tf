@@ -4,8 +4,8 @@ resource "aws_route53_record" "xml_alb_internal" {
   type    = "A"
 
   alias {
-    name                   = module.xml_internal_alb.this_lb_dns_name
-    zone_id                = module.xml_internal_alb.this_lb_zone_id
+    name                   = module.xml_internal_alb.lb_dns_name
+    zone_id                = module.xml_internal_alb.lb_zone_id
     evaluate_target_health = true
   }
 }
@@ -15,5 +15,5 @@ resource "aws_route53_record" "xml_rds" {
   name    = "${var.application}db"
   type    = "CNAME"
   ttl     = "300"
-  records = [module.xml_rds.this_db_instance_address]
+  records = [module.xml_rds.db_instance_identifier]
 }

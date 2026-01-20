@@ -13,7 +13,7 @@ locals {
   finance_gid          = "1003"
   finance_group        = "e5fsadmin"
 
-  dba_dev_cidrs_list = jsondecode(data.vault_generic_secret.xml_rds_data.data_json)["dba-dev-cidrs"]
+  dba_dev_cidrs_list = jsondecode(nonsensitive(data.vault_generic_secret.xml_rds_data.data_json))["dba-dev-cidrs"]
 
   kms_keys_data          = data.vault_generic_secret.kms_keys.data
   security_kms_keys_data = data.vault_generic_secret.security_kms_keys.data
@@ -80,8 +80,9 @@ locals {
   default_tags = {
     Terraform   = "true"
     Application = upper(var.application)
+    Repository  = "xml-terraform"
+    Environment = var.environment
     Region      = var.aws_region
-    Account     = var.aws_account
   }
 
   ef_presenter_data_import = var.ef_presenter_data_import ? tomap(jsondecode(data.vault_generic_secret.ef_presenter_data_import[0].data_json)) : {}

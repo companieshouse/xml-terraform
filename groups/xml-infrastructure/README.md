@@ -1,45 +1,46 @@
 # XML Infrastructure
 
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13.0, < 0.14 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 0.3, < 4.0 |
-| <a name="requirement_vault"></a> [vault](#requirement\_vault) | >= 2.0.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3, < 2.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.0, < 6.0 |
+| <a name="requirement_vault"></a> [vault](#requirement\_vault) | >= 4.0, < 5.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 0.3, < 4.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.0, < 6.0 |
 | <a name="provider_template"></a> [template](#provider\_template) | n/a |
-| <a name="provider_vault"></a> [vault](#provider\_vault) | >= 2.0.0 |
+| <a name="provider_vault"></a> [vault](#provider\_vault) | >= 4.0, < 5.0 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_asg_alarms"></a> [asg\_alarms](#module\_asg\_alarms) | git@github.com:companieshouse/terraform-modules//aws/asg-cloudwatch-alarms | tags/1.0.116 |
-| <a name="module_bep_asg"></a> [bep\_asg](#module\_bep\_asg) | git@github.com:companieshouse/terraform-modules//aws/terraform-aws-autoscaling | tags/1.0.36 |
-| <a name="module_bep_asg_alarms"></a> [bep\_asg\_alarms](#module\_bep\_asg\_alarms) | git@github.com:companieshouse/terraform-modules//aws/asg-cloudwatch-alarms | tags/1.0.116 |
+| <a name="module_asg_alarms"></a> [asg\_alarms](#module\_asg\_alarms) | git@github.com:companieshouse/terraform-modules//aws/asg-cloudwatch-alarms | tags/1.0.363 |
+| <a name="module_bep_asg"></a> [bep\_asg](#module\_bep\_asg) | git@github.com:companieshouse/terraform-modules//aws/terraform-aws-autoscaling | tags/1.0.354 |
+| <a name="module_bep_asg_alarms"></a> [bep\_asg\_alarms](#module\_bep\_asg\_alarms) | git@github.com:companieshouse/terraform-modules//aws/asg-cloudwatch-alarms | tags/1.0.363 |
 | <a name="module_cloudwatch_sns_notifications"></a> [cloudwatch\_sns\_notifications](#module\_cloudwatch\_sns\_notifications) | terraform-aws-modules/sns/aws | 3.3.0 |
 | <a name="module_cloudwatch_sns_ooh"></a> [cloudwatch\_sns\_ooh](#module\_cloudwatch\_sns\_ooh) | terraform-aws-modules/sns/aws | 3.3.0 |
-| <a name="module_fe_asg"></a> [fe\_asg](#module\_fe\_asg) | git@github.com:companieshouse/terraform-modules//aws/terraform-aws-autoscaling | tags/1.0.36 |
-| <a name="module_rds_cloudwatch_alarms"></a> [rds\_cloudwatch\_alarms](#module\_rds\_cloudwatch\_alarms) | git@github.com:companieshouse/terraform-modules//aws/oracledb_cloudwatch_alarms | tags/1.0.173 |
-| <a name="module_rds_start_stop_schedule"></a> [rds\_start\_stop\_schedule](#module\_rds\_start\_stop\_schedule) | git@github.com:companieshouse/terraform-modules//aws/rds_start_stop_schedule | tags/1.0.131 |
-| <a name="module_xml_bep_asg_security_group"></a> [xml\_bep\_asg\_security\_group](#module\_xml\_bep\_asg\_security\_group) | terraform-aws-modules/security-group/aws | ~> 3.0 |
-| <a name="module_xml_bep_profile"></a> [xml\_bep\_profile](#module\_xml\_bep\_profile) | git@github.com:companieshouse/terraform-modules//aws/instance_profile | tags/1.0.59 |
-| <a name="module_xml_external_alb"></a> [xml\_external\_alb](#module\_xml\_external\_alb) | terraform-aws-modules/alb/aws | ~> 5.0 |
-| <a name="module_xml_external_alb_alarms"></a> [xml\_external\_alb\_alarms](#module\_xml\_external\_alb\_alarms) | git@github.com:companieshouse/terraform-modules//aws/alb-cloudwatch-alarms | tags/1.0.116 |
-| <a name="module_xml_external_alb_security_group"></a> [xml\_external\_alb\_security\_group](#module\_xml\_external\_alb\_security\_group) | terraform-aws-modules/security-group/aws | ~> 3.0 |
-| <a name="module_xml_fe_asg_security_group"></a> [xml\_fe\_asg\_security\_group](#module\_xml\_fe\_asg\_security\_group) | terraform-aws-modules/security-group/aws | ~> 3.0 |
-| <a name="module_xml_fe_profile"></a> [xml\_fe\_profile](#module\_xml\_fe\_profile) | git@github.com:companieshouse/terraform-modules//aws/instance_profile | tags/1.0.59 |
-| <a name="module_xml_internal_alb"></a> [xml\_internal\_alb](#module\_xml\_internal\_alb) | terraform-aws-modules/alb/aws | ~> 5.0 |
-| <a name="module_xml_internal_alb_alarms"></a> [xml\_internal\_alb\_alarms](#module\_xml\_internal\_alb\_alarms) | git@github.com:companieshouse/terraform-modules//aws/alb-cloudwatch-alarms | tags/1.0.116 |
-| <a name="module_xml_internal_alb_security_group"></a> [xml\_internal\_alb\_security\_group](#module\_xml\_internal\_alb\_security\_group) | terraform-aws-modules/security-group/aws | ~> 3.0 |
-| <a name="module_xml_rds"></a> [xml\_rds](#module\_xml\_rds) | terraform-aws-modules/rds/aws | 2.23.0 |
-| <a name="module_xml_rds_security_group"></a> [xml\_rds\_security\_group](#module\_xml\_rds\_security\_group) | terraform-aws-modules/security-group/aws | ~> 3.0 |
+| <a name="module_fe_asg"></a> [fe\_asg](#module\_fe\_asg) | git@github.com:companieshouse/terraform-modules//aws/terraform-aws-autoscaling | tags/1.0.354 |
+| <a name="module_rds_cloudwatch_alarms"></a> [rds\_cloudwatch\_alarms](#module\_rds\_cloudwatch\_alarms) | git@github.com:companieshouse/terraform-modules//aws/oracledb_cloudwatch_alarms | tags/1.0.195 |
+| <a name="module_rds_start_stop_schedule"></a> [rds\_start\_stop\_schedule](#module\_rds\_start\_stop\_schedule) | git@github.com:companieshouse/terraform-modules//aws/rds_start_stop_schedule | tags/1.0.363 |
+| <a name="module_xml_bep_asg_security_group"></a> [xml\_bep\_asg\_security\_group](#module\_xml\_bep\_asg\_security\_group) | terraform-aws-modules/security-group/aws | ~> 5.3.1 |
+| <a name="module_xml_bep_profile"></a> [xml\_bep\_profile](#module\_xml\_bep\_profile) | git@github.com:companieshouse/terraform-modules//aws/instance_profile | tags/1.0.363 |
+| <a name="module_xml_external_alb"></a> [xml\_external\_alb](#module\_xml\_external\_alb) | terraform-aws-modules/alb/aws | ~> 6.7.0 |
+| <a name="module_xml_external_alb_alarms"></a> [xml\_external\_alb\_alarms](#module\_xml\_external\_alb\_alarms) | git@github.com:companieshouse/terraform-modules//aws/alb-cloudwatch-alarms | tags/1.0.363 |
+| <a name="module_xml_external_alb_security_group"></a> [xml\_external\_alb\_security\_group](#module\_xml\_external\_alb\_security\_group) | terraform-aws-modules/security-group/aws | ~> 5.3.1 |
+| <a name="module_xml_fe_asg_security_group"></a> [xml\_fe\_asg\_security\_group](#module\_xml\_fe\_asg\_security\_group) | terraform-aws-modules/security-group/aws | ~> 5.3.1 |
+| <a name="module_xml_fe_profile"></a> [xml\_fe\_profile](#module\_xml\_fe\_profile) | git@github.com:companieshouse/terraform-modules//aws/instance_profile | tags/1.0.363 |
+| <a name="module_xml_internal_alb"></a> [xml\_internal\_alb](#module\_xml\_internal\_alb) | terraform-aws-modules/alb/aws | ~> 6.7.0 |
+| <a name="module_xml_internal_alb_alarms"></a> [xml\_internal\_alb\_alarms](#module\_xml\_internal\_alb\_alarms) | git@github.com:companieshouse/terraform-modules//aws/alb-cloudwatch-alarms | tags/1.0.363 |
+| <a name="module_xml_internal_alb_security_group"></a> [xml\_internal\_alb\_security\_group](#module\_xml\_internal\_alb\_security\_group) | terraform-aws-modules/security-group/aws | ~> 5.3.1 |
+| <a name="module_xml_rds"></a> [xml\_rds](#module\_xml\_rds) | terraform-aws-modules/rds/aws | 6.13.1 |
+| <a name="module_xml_rds_security_group"></a> [xml\_rds\_security\_group](#module\_xml\_rds\_security\_group) | terraform-aws-modules/security-group/aws | ~> 5.3.1 |
 
 ## Resources
 
@@ -78,15 +79,16 @@
 | [aws_security_group.rds_ingress](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/security_group) | data source |
 | [aws_security_group.rds_shared](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/security_group) | data source |
 | [aws_subnet.web_details](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/subnet) | data source |
-| [aws_subnet_ids.application](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/subnet_ids) | data source |
-| [aws_subnet_ids.data](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/subnet_ids) | data source |
-| [aws_subnet_ids.public](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/subnet_ids) | data source |
-| [aws_subnet_ids.web](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/subnet_ids) | data source |
+| [aws_subnets.application](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/subnets) | data source |
+| [aws_subnets.data](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/subnets) | data source |
+| [aws_subnets.public](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/subnets) | data source |
+| [aws_subnets.web](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/subnets) | data source |
 | [aws_vpc.vpc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/vpc) | data source |
 | [template_cloudinit_config.bep_userdata_config](https://registry.terraform.io/providers/hashicorp/template/latest/docs/data-sources/cloudinit_config) | data source |
 | [template_cloudinit_config.fe_userdata_config](https://registry.terraform.io/providers/hashicorp/template/latest/docs/data-sources/cloudinit_config) | data source |
 | [template_file.bep_userdata](https://registry.terraform.io/providers/hashicorp/template/latest/docs/data-sources/file) | data source |
 | [template_file.fe_userdata](https://registry.terraform.io/providers/hashicorp/template/latest/docs/data-sources/file) | data source |
+| [template_file.finance_fstab_entry](https://registry.terraform.io/providers/hashicorp/template/latest/docs/data-sources/file) | data source |
 | [template_file.xml_cron_file](https://registry.terraform.io/providers/hashicorp/template/latest/docs/data-sources/file) | data source |
 | [vault_generic_secret.account_ids](https://registry.terraform.io/providers/hashicorp/vault/latest/docs/data-sources/generic_secret) | data source |
 | [vault_generic_secret.ef_presenter_data_import](https://registry.terraform.io/providers/hashicorp/vault/latest/docs/data-sources/generic_secret) | data source |
@@ -125,6 +127,7 @@
 | <a name="input_bep_instance_size"></a> [bep\_instance\_size](#input\_bep\_instance\_size) | The size of the ec2 instances to build | `string` | n/a | yes |
 | <a name="input_bep_max_size"></a> [bep\_max\_size](#input\_bep\_max\_size) | The max size of the ASG | `number` | n/a | yes |
 | <a name="input_bep_min_size"></a> [bep\_min\_size](#input\_bep\_min\_size) | The min size of the ASG | `number` | n/a | yes |
+| <a name="input_bep_mount_finance_nfs_share"></a> [bep\_mount\_finance\_nfs\_share](#input\_bep\_mount\_finance\_nfs\_share) | Defines whether the finance share should be mounted | `bool` | `false` | no |
 | <a name="input_domain_name"></a> [domain\_name](#input\_domain\_name) | Domain Name for ACM Certificate | `string` | `"*.companieshouse.gov.uk"` | no |
 | <a name="input_ef_presenter_data_import"></a> [ef\_presenter\_data\_import](#input\_ef\_presenter\_data\_import) | A boolean value representing whether EF presenter data import is enabled or not for the environment being provisioned | `bool` | `false` | no |
 | <a name="input_enable_sns_topic"></a> [enable\_sns\_topic](#input\_enable\_sns\_topic) | A boolean value to alter deployment of an SNS topic for CloudWatch actions | `bool` | `false` | no |
@@ -140,11 +143,15 @@
 | <a name="input_fe_max_size"></a> [fe\_max\_size](#input\_fe\_max\_size) | The max size of the ASG | `number` | n/a | yes |
 | <a name="input_fe_min_size"></a> [fe\_min\_size](#input\_fe\_min\_size) | The min size of the ASG | `number` | n/a | yes |
 | <a name="input_fe_service_port"></a> [fe\_service\_port](#input\_fe\_service\_port) | Target group backend port | `number` | `80` | no |
+| <a name="input_hashicorp_vault_password"></a> [hashicorp\_vault\_password](#input\_hashicorp\_vault\_password) | The password used when retrieving configuration from Hashicorp Vault | `string` | n/a | yes |
+| <a name="input_hashicorp_vault_username"></a> [hashicorp\_vault\_username](#input\_hashicorp\_vault\_username) | The username used when retrieving configuration from Hashicorp Vault | `string` | n/a | yes |
 | <a name="input_instance_class"></a> [instance\_class](#input\_instance\_class) | The type of instance for the RDS | `string` | `"db.t3.medium"` | no |
 | <a name="input_license_model"></a> [license\_model](#input\_license\_model) | The license model for the engine, byol or license-include: https://aws.amazon.com/rds/oracle/faqs/ | `string` | n/a | yes |
 | <a name="input_major_engine_version"></a> [major\_engine\_version](#input\_major\_engine\_version) | The major version of the database engine type e.g. 12.1 | `string` | n/a | yes |
 | <a name="input_maximum_storage"></a> [maximum\_storage](#input\_maximum\_storage) | The maximum storage in GB to allow RDS to scale to | `number` | n/a | yes |
 | <a name="input_multi_az"></a> [multi\_az](#input\_multi\_az) | Whether the RDS is Multi-AZ | `bool` | `false` | no |
+| <a name="input_nfs_finance_mounts"></a> [nfs\_finance\_mounts](#input\_nfs\_finance\_mounts) | A map of objects which contains mount details for each mount path required. | `map(any)` | <pre>{<br/>  "SH_NFSTest": {<br/>    "local_mount_point": "folder",<br/>    "mount_options": [<br/>      "rw",<br/>      "wsize=8192"<br/>    ]<br/>  }<br/>}</pre> | no |
+| <a name="input_nfs_finance_server"></a> [nfs\_finance\_server](#input\_nfs\_finance\_server) | The name or IP of the environment specific NFS server | `string` | `null` | no |
 | <a name="input_nfs_mount_destination_parent_dir"></a> [nfs\_mount\_destination\_parent\_dir](#input\_nfs\_mount\_destination\_parent\_dir) | The parent folder that all NFS shares should be mounted inside on the EC2 instance | `string` | `"/mnt"` | no |
 | <a name="input_nfs_mounts"></a> [nfs\_mounts](#input\_nfs\_mounts) | A map of objects which contains mount details for each mount path required. | `map(any)` | <pre>{<br/>  "SH_NFSTest": {<br/>    "local_mount_point": "folder",<br/>    "mount_options": [<br/>      "rw",<br/>      "wsize=8192"<br/>    ]<br/>  }<br/>}</pre> | no |
 | <a name="input_nfs_server"></a> [nfs\_server](#input\_nfs\_server) | The name or IP of the environment specific NFS server | `string` | `null` | no |
@@ -173,3 +180,4 @@
 |------|-------------|
 | <a name="output_rds_address"></a> [rds\_address](#output\_rds\_address) | n/a |
 | <a name="output_xml_frontend_address_internal"></a> [xml\_frontend\_address\_internal](#output\_xml\_frontend\_address\_internal) | n/a |
+<!-- END_TF_DOCS -->

@@ -3,7 +3,7 @@
 # ------------------------------------------------------------------------------
 module "xml_fe_asg_security_group" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 3.0"
+  version = "~> 5.3.1"
 
   name        = "sgr-${var.application}-fe-asg-001"
   description = "Security group for the ${var.application} asg"
@@ -12,11 +12,11 @@ module "xml_fe_asg_security_group" {
   computed_ingress_with_source_security_group_id = [
     {
       rule                     = "http-80-tcp"
-      source_security_group_id = module.xml_internal_alb_security_group.this_security_group_id
+      source_security_group_id = module.xml_internal_alb_security_group.security_group_id
     },
     {
       rule                     = "http-80-tcp"
-      source_security_group_id = module.xml_external_alb_security_group.this_security_group_id
+      source_security_group_id = module.xml_external_alb_security_group.security_group_id
     }
   ]
   number_of_computed_ingress_with_source_security_group_id = 2
@@ -33,9 +33,10 @@ resource "aws_cloudwatch_log_group" "xml_fe" {
 
   tags = merge(
     local.default_tags,
-    map(
-      "ServiceTeam", "${upper(var.application)}-FE-Support"
-    )
+    {
+      Name        = each.value["log_group_name"]
+      ServiceTeam = "${upper(var.application)}-FE-Support"
+    }
   )
 }
 
@@ -65,7 +66,7 @@ resource "aws_autoscaling_schedule" "fe-schedule-start" {
 
 # ASG Module
 module "fe_asg" {
-  source = "git@github.com:companieshouse/terraform-modules//aws/terraform-aws-autoscaling?ref=tags/1.0.36"
+  source = "git@github.com:companieshouse/terraform-modules//aws/terraform-aws-autoscaling?ref=tags/1.0.354"
 
   name = "${var.application}-webserver"
   # Launch configuration
@@ -73,7 +74,7 @@ module "fe_asg" {
   image_id      = data.aws_ami.fe_xml.id
   instance_type = var.fe_instance_size
   security_groups = [
-    module.xml_fe_asg_security_group.this_security_group_id,
+    module.xml_fe_asg_security_group.security_group_id,
     data.aws_security_group.nagios_shared.id
   ]
   root_block_device = [
@@ -87,7 +88,7 @@ module "fe_asg" {
   ]
   # Auto scaling group
   asg_name                       = "${var.application}-fe-asg"
-  vpc_zone_identifier            = data.aws_subnet_ids.web.ids
+  vpc_zone_identifier            = data.aws_subnets.web.ids
   health_check_type              = "ELB"
   min_size                       = var.fe_min_size
   max_size                       = var.fe_max_size
@@ -104,13 +105,13 @@ module "fe_asg" {
   iam_instance_profile           = module.xml_fe_profile.aws_iam_instance_profile.name
   user_data_base64               = data.template_cloudinit_config.fe_userdata_config.rendered
 
+
   tags_as_map = merge(
     local.default_tags,
-    map(
-      "ServiceTeam", "${upper(var.application)}-FE-Support"
-    )
+    {
+      ServiceTeam = "${upper(var.application)}-FE-Support"
+    }
   )
-
   depends_on = [
     module.xml_external_alb,
     module.xml_internal_alb
@@ -121,7 +122,7 @@ module "fe_asg" {
 # FE ASG CloudWatch Alarms
 #--------------------------------------------
 module "asg_alarms" {
-  source = "git@github.com:companieshouse/terraform-modules//aws/asg-cloudwatch-alarms?ref=tags/1.0.116"
+  source = "git@github.com:companieshouse/terraform-modules//aws/asg-cloudwatch-alarms?ref=tags/1.0.363"
 
   autoscaling_group_name = module.fe_asg.this_autoscaling_group_name
   prefix                 = "${var.application}-fe-asg-alarms"
