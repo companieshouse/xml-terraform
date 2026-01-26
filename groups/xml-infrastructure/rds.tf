@@ -136,6 +136,8 @@ module "xml_rds" {
   password = local.xml_rds_data["admin-password"]
   port     = "1521"
 
+  manage_master_user_password = false
+
   deletion_protection              = true
   maintenance_window               = var.rds_maintenance_window
   backup_window                    = var.rds_backup_window
