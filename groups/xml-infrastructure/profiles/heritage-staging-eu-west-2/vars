@@ -15,9 +15,9 @@ enable_sns_topic = "false"
 
 # Frontend ASG settings
 fe_instance_size = "t2.large"
-fe_min_size = 1
+fe_min_size = 3
 fe_max_size = 6
-fe_desired_capacity = 1
+fe_desired_capacity = 3
 
 # FE Load Balancer
 public_allow_cidr_blocks = [
