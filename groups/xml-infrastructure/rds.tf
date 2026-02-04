@@ -191,7 +191,7 @@ module "xml_rds" {
   tags = merge(
     local.default_tags,
     {
-      Name        = upper(var.application)
+      Name        = join("-", ["rds", var.application, var.environment, "001"])
       ServiceTeam = "${upper(var.application)}-DBA-Support"
     }
   )
