@@ -35,7 +35,6 @@ nfs_server = "cvodata-n2.live.heritage.aws.internal"
 nfs_finance_server = "cvodata-n1.live.finance.aws.internal"
 
 nfs_mount_destination_parent_dir = "/-"
-nfs_finance_mount_destination_parent_dir = "/finance_live_e5fs/data/"
 
 nfs_mounts = {
     # AWS NFS
