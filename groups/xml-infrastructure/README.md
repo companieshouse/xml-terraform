@@ -7,6 +7,7 @@
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3, < 2.0 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.0, < 6.0 |
+| <a name="requirement_cloudinit"></a> [cloudinit](#requirement\_cloudinit) | >= 2.0, < 3.0 |
 | <a name="requirement_vault"></a> [vault](#requirement\_vault) | >= 4.0, < 5.0 |
 
 ## Providers
@@ -14,6 +15,7 @@
 | Name | Version |
 |------|---------|
 | <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.0, < 6.0 |
+| <a name="provider_cloudinit"></a> [cloudinit](#provider\_cloudinit) | >= 2.0, < 3.0 |
 | <a name="provider_template"></a> [template](#provider\_template) | n/a |
 | <a name="provider_vault"></a> [vault](#provider\_vault) | >= 4.0, < 5.0 |
 
@@ -84,8 +86,8 @@
 | [aws_subnets.public](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/subnets) | data source |
 | [aws_subnets.web](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/subnets) | data source |
 | [aws_vpc.vpc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/vpc) | data source |
-| [template_cloudinit_config.bep_userdata_config](https://registry.terraform.io/providers/hashicorp/template/latest/docs/data-sources/cloudinit_config) | data source |
-| [template_cloudinit_config.fe_userdata_config](https://registry.terraform.io/providers/hashicorp/template/latest/docs/data-sources/cloudinit_config) | data source |
+| [cloudinit_config.bep_userdata_config](https://registry.terraform.io/providers/hashicorp/cloudinit/latest/docs/data-sources/config) | data source |
+| [cloudinit_config.fe_userdata_config](https://registry.terraform.io/providers/hashicorp/cloudinit/latest/docs/data-sources/config) | data source |
 | [template_file.bep_userdata](https://registry.terraform.io/providers/hashicorp/template/latest/docs/data-sources/file) | data source |
 | [template_file.fe_userdata](https://registry.terraform.io/providers/hashicorp/template/latest/docs/data-sources/file) | data source |
 | [template_file.finance_fstab_entry](https://registry.terraform.io/providers/hashicorp/template/latest/docs/data-sources/file) | data source |
@@ -171,8 +173,6 @@
 | <a name="input_region"></a> [region](#input\_region) | Short version of the name of the AWS region in which resources will be administered | `string` | n/a | yes |
 | <a name="input_test_access_enable"></a> [test\_access\_enable](#input\_test\_access\_enable) | Controls whether access from the Test subnets is required (true) or not (false) | `bool` | `false` | no |
 | <a name="input_test_concourse_rds_access_enable"></a> [test\_concourse\_rds\_access\_enable](#input\_test\_concourse\_rds\_access\_enable) | Controls whether RDS access from the Test Concourse subnets is permitted (true) or not (false) | `bool` | `false` | no |
-| <a name="input_vault_password"></a> [vault\_password](#input\_vault\_password) | Password for connecting to Vault - usually supplied through TF\_VARS | `string` | n/a | yes |
-| <a name="input_vault_username"></a> [vault\_username](#input\_vault\_username) | Username for connecting to Vault - usually supplied through TF\_VARS | `string` | n/a | yes |
 
 ## Outputs
 
