@@ -70,6 +70,7 @@
 #0 10 * * * /home/xml/supportscripts/failedCerts.sh >/dev/null 2>&1
 #05 10 * * * /home/xml/supportscripts/failedMortCerts.sh >/dev/null 2>&1
 #*/15 7-18 * * * /home/xml/supportscripts/status7TNEP.sh >/dev/null 2>&1
+*/20 7-18 * * * /home/xml/supportscripts/LockCheck.sh >/dev/null 2>&1 
 #*/15 7-18 * * * /home/xml/efbackend/updateGenBarcodeSub.sh >/dev/null 2>&1
 ##########################################################################################
 ##################################### STATS GENERATION START #############################
