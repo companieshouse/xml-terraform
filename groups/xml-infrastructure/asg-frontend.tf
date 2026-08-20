@@ -109,7 +109,9 @@ module "fe_asg" {
   tags_as_map = merge(
     local.default_tags,
     {
-      ServiceTeam = "${upper(var.application)}-FE-Support"
+      ServiceTeam               = "${upper(var.application)}-FE-Support"
+      tenable-cwp-scan-disabled = "true"
+      Repository                = "xml-terraform"
     }
   )
   depends_on = [
