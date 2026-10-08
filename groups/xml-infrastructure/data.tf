@@ -239,6 +239,7 @@ data "template_file" "bep_userdata" {
   vars = {
     REGION                  = var.aws_region
     HERITAGE_ENVIRONMENT    = title(var.environment)
+    MOUNT_FINANCE_NFS_SHARE = var.bep_mount_finance_nfs_share
     APP_VERSION             = var.bep_app_release_version
     XML_BACKEND_INPUTS_PATH = "${local.parameter_store_path_prefix}/backend_inputs"
     ANSIBLE_INPUTS_PATH     = "${local.parameter_store_path_prefix}/backend_ansible_inputs"
