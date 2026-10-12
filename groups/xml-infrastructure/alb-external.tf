@@ -49,6 +49,7 @@ module "xml_external_alb" {
       port               = 443
       protocol           = "HTTPS"
       certificate_arn    = data.aws_acm_certificate.acm_cert.arn
+      ssl_policy         = var.alb_ssl_policy 
       target_group_index = 0
     },
   ]
