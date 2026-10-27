@@ -23,9 +23,7 @@ fi
 #Set FESS_TOKEN
 FESS_TOKEN=$($${GET_PARAM_COMMAND} '${XML_FESS_TOKEN_PATH}')
 echo "export FESS_TOKEN=$${FESS_TOKEN}" >> /home/xml/.bash_profile
-#Update Nagios registration script with relevant template
-cp /usr/local/bin/nagios-host-add.sh /usr/local/bin/nagios-host-add.j2
-REPLACE=XML_BEP_${HERITAGE_ENVIRONMENT} /usr/local/bin/j2 /usr/local/bin/nagios-host-add.j2 > /usr/local/bin/nagios-host-add.sh
+
 #Create the TNSNames.ora file for Oracle
 /usr/local/bin/j2 -f json /usr/lib/oracle/11.2/client64/lib/tnsnames.j2 inputs.json > /usr/lib/oracle/11.2/client64/lib/tnsnames.ora
 #Remove unnecessary files
